@@ -7,7 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { RouterModule } from '@angular/router';
 
 //services
-import { AuthentificationService } from './user/authentification.service';
+import { LoginService } from './user/login/login.service';
 import { UserService } from './user/user.service';
 import { TripService } from './trip/trip.service';
 
@@ -30,7 +30,7 @@ import { UserModule } from './user/user.module';
   ],
   exports: [ //penser a exports les modules dans les features modules, (ceux qui seront utiliser par le module parent)
   ],
-  providers: [ AuthentificationService, UserService, TripService ],
+  providers: [ LoginService, UserService, TripService ],
   bootstrap: [ AppComponent ]
 })
 

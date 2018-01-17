@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpModule } from '@angular/http';
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable} from 'rxjs/Observable';
 import { Headers } from '@angular/http';
 import { environment } from '../../environments/environment';
@@ -7,7 +7,7 @@ import { environment } from '../../environments/environment';
 @Injectable()
 export class UserService {
     
-    constructor(private http: HttpModule) { }
+    constructor(private http: HttpClient) { }
 
     baseUrl = environment.apiUrl + ':' + environment.apiPort;
 

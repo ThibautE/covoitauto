@@ -1,12 +1,17 @@
-<form *ngIf="!isLoggedIn" (ngSubmit)= "onSubmit()" >
-		<label for="username"> Login </label>
-		<input type="text" class ="form-control" id="username"  required placeholder="email" [(ngModel)]="username" name = "username"/><p></p>
-		<label for="pass">Password</label>
-		<input type="password" class ="form-control" id="pass"  required placeholder="password" [(ngModel)]="pass" name = "pass"/><p></p>
-	<button [routerLink]="['/inscription']">Se connecter</button>
-</form>
-<div *ngIf="isLoggedIn">
-	Bonjour {{username}}! Vous êtes connecté
-	<br/><br/>
-	<button (click)="logout()"> Se déconnecter</button>
+<div>
+  <div *ngIf="!isLogged">
+    <button [routerLink]="['register']">S'inscrire</button>
+    <button [routerLink]="['login']">Se connecter</button>
+  </div>
+
+  <div *ngIf="isLogged">
+    <div>
+      <h2 >
+        <a [routerLink]="['/dashboard']">{{displayedName}} </a>
+      </h2>
+    </div>
+
+    <button (click)="logout()" >déconnexion</button>
+
+  </div>
 </div>

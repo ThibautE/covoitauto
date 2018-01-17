@@ -1,8 +1,8 @@
-import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { UserService } from '../user.service';
+import { Component, OnInit } from '@angular/core';
+import { LoginService } from './login.service';
+import { Observable } from 'rxjs/Observable';
+import { Router } from "@angular/router";
+import { Cookie } from 'ng2-cookies';
 
 @Component({
   selector: 'app-login',
@@ -10,39 +10,67 @@ import { UserService } from '../user.service';
   styleUrls: ['./login.component.css']
 })
 
-export class LoginComponent implements OnInit {
-    
-	model: any = {}; // champs du formulaire
-  	loading = false;
-  	returnUrl: string; // si forcé de se logger pour une action, permet de revenir à la  bonne page
-  	msgs: Message[] =  []; // messages de notification type "user successfully registered" / "wrong password"
-  	
+export class LoginComponent implements OnInit{
 
-  	constructor( private route: ActivatedRoute, private router: Router, private user: UserService) { }
+  isLogged: boolean = false;
+  private displayedName: string = '';
 
-  	ngOnInit() {
-	    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
-	    this.msgs = [];
-	    if (this.route.snapshot.queryParams['origin'] &&
-      		this.route.snapshot.queryParams['origin'] === 'register') {
-      		this.msgs.push({severity: 'success', summary: 'Compte créé', detail: 'Vous pouvez maintenant vous connecter'});
-      		this.model.mail = this.route.snapshot.queryParams['mail'] || '';
-    	}
-  	}
+  private firstName: string = '';
+  private lastName: string = '';
+  private admin = false;
 
-  	login() {
-    	this.loading = true;
- 	   	this.user.login(this.model.mail, this.model.password).subscribe(res => {
-        	this.loading = false;
-        	if (res[0]) {
-          		if (this.returnUrl === '/') {
-            		this.returnUrl = '/dashboard';
-          		}
-          		this.router.navigate([this.returnUrl]);
-        	}else{
-          		this.msgs = [];
-          		this.msgs.push({});
-        	}
-      	});
-  	}
+  constructor(private loginService: LoginService, private route: Router) {}
+
+  ngOnInit() {
+    this.loginService.subject.subscribe(obs => {
+      obs.subscribe(res => {
+        console.log('Requête D\'auth recue');
+        this.checkLogin(res);
+      });
+    });
+    if( Cookie.check('mail') && !this.isLogged){
+      this.loadUser();
+    }
+  }
+
+  checkLogin(user: any){
+
+    if (user){
+      user = user[0];
+    }else {
+      return;
+    }
+
+    Cookie.set('_id', user._id);
+    Cookie.set('mail', user.mail);
+    Cookie.set('firstName', user.prenom);
+    Cookie.set('lastName', user.nom);
+    Cookie.set('isAdmin', (user.role.indexOf('admin') >= 0 ) ? 'true' : 'false');
+
+    this.loadUser();
+  }
+
+  logout(){
+    // console.log('Logging out -->[]');
+    Cookie.deleteAll();
+    this.isLogged = false;
+    this.route.navigate(['/']);
+  }
+
+  isAdmin(){
+    return this.admin;
+  }
+
+
+  /**
+   * Depuis les cookies de session, met à jour les infos de base (notamment pour les guards)
+   */
+  private loadUser() {
+    this.firstName = Cookie.get('firstName');
+    this.lastName = Cookie.get('lastName');
+    this.displayedName = this.firstName + ' ' + this.lastName[0]; // prenom + initiale nom
+    this.admin = Cookie.get('isAdmin') == 'true';
+
+    this.isLogged = true;
+  }
 }
