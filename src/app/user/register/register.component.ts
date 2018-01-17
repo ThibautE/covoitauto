@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-
-import { UserService } from '../../services/index';
+//service
+import { UserService } from '../user.service';
 
 @Component({
     moduleId: module.id,
@@ -9,47 +9,25 @@ import { UserService } from '../../services/index';
     styleUrls: ['./register.component.css']
 })
 
-export class RegisterComponent {
+export class RegisterComponent implements OnInit {
 
-    private mail : string;
-    private nom : string;
-    private prenom : string;
-    private age : number;
-    private motdepasse : string;
-    private tel : string;
-    private rue : string;
-    private ville : string;
-    private pays : string;
-    private voiture : string;
-    private rep : string;
-    private msg : string;
+    model: any = {};
+    loading = false;
 
-    constructor(public user: UserService) { }
+    constructor(private route : Router, private user: UserService) { }
 
-    onSubmit() {
-        var user = {
-            mail :this.mail,
-            nom :this.nom,
-            prenom :this.prenom,
-            adresse: {
-                tel : this.tel,
-                nom : this.rue,
-                ville : this.ville,
-                pays : this.pays
-            },
-            tel : this.tel,
-            voiture : this.voiture,
-            age : this.age,
-            password :this.motdepasse
-        };
-    
-        if(this.mail == undefined || this.nom == undefined || this.prenom == undefined || this.voiture || this.tel==null || this.rue == undefined || this.ville == undefined || this.pays ==undefined || this.motdepasse==undefined || this.age == null){
-            this.msg = "ERREUR! Vous n'avez pas été enregistré, vérifiez que vous avez bien rempli les champs"
-        }else{
-            this.user.create(user).subscribe((res:any)=>{
-                this.rep=res;
-                this.msg = "Félicitation! Vous êtes enregistré"
-          });
-        }
+    ngOnInit() {
+
+    }
+
+    register() {
+        this.loading = true;
+        this.user.create(this.model).subscribe(data => {
+            this.loading = false;
+            this.route.navigate(['/login'], { queryParams: { origin: 'register', mail: this.model.mail }});
+        },
+        error => {
+            this.loading = false;
+        });
     }
 }
