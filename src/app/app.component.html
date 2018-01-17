@@ -1,15 +1,15 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div id="header">
-<a href="http://localhost:4200/"><img id="logo" src="http://www.mjc-rambouillet.asso.fr/covoiturage/images/logo-covoiturage.png" alt="logo"></a>
-<div class="btrajet">
-    <button [routerLink]="[{'outlets':{'trip': ['create']}}]">Créer un trajet</button>
-</div>
-<div class="connexion">
-    <button [routerLink]="['login']">Connexion</button>
-    <button [routerLink]="['register']">S'inscrire</button>
-</div>
-<h1>Bienvenue sur Covoitauto!</h1>
+<div id="main">
+	<div id="header">
+	<a href="http://localhost:4200/"><img id="logo" src="http://www.mjc-rambouillet.asso.fr/covoiturage/images/logo-covoiturage.png" alt="logo"></a>
+	<div class="btrajet">
+	    <button [routerLink]="[{'outlets':{'trip': ['create']}}]">Créer un trajet</button>
+	</div>
+	<div id="user"><app-login></app-login></div>
+	<h1>Bienvenue sur Covoitauto!</h1>
+	</div>
 
+<<<<<<< HEAD
 <div class="trip">
 	<h3>En voiture! choisissez votre trajet : </h3>
     <app-trips-search></app-trips-search>  
@@ -17,5 +17,15 @@
 </div>
 <div class="user" >
 	<router-outlet></router-outlet>
+=======
+	<div class="trip">
+		<h3>En voiture! choisissez votre trajet : </h3>
+	    <app-trips-search></app-trips-search>   
+	  	<router-outlet name="trip"></router-outlet> 
+	</div>
+	<div class="user" >
+		<router-outlet></router-outlet>
+	</div>
+>>>>>>> 1324ed833630b3fce4409adde4b41e030dbd449a
 </div>
 

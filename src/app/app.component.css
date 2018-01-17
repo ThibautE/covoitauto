@@ -32,6 +32,11 @@ li a:hover {
     display: block;
 }
 
+#user{
+    float: right;
+    width: 30%;
+}
+
 #logo{
     display: inline-block;
     width: 5%;

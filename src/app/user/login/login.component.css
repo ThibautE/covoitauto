@@ -12,6 +12,7 @@ form input{
 button {
     background-color: #e54d42;
     border: none;
+    width: 35%;
     color: white;
     padding: 10px 30px;
     text-align: center;
@@ -19,4 +20,8 @@ button {
     margin: 4px;
     margin-right: 8%;
     float: right;
+}
+
+.err{
+    color: red;
 }
