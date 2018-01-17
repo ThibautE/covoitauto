@@ -1,0 +1,131 @@
+[
+	{
+		"email":"xKiller34@yopmail.com",
+		"nom" : "Paul",
+		"prenom" : "Arnold",
+		"listRole" : ["membre"],
+		"note" : 5,
+		"adresse" : {
+			"numero" : 2,
+			"nom" : "Avenue de France",
+			"ville" : "Toulouse",
+			"pays" : "France"
+		},
+		"telephone" : "0651042945",
+		"age" : 22,
+		"password" : "password"
+	},
+	{
+		"email":"jean.michel@gmail.com",
+		"nom" : "Michel",
+		"prenom" : "Jean",
+		"listRole" : ["membre"],
+		"note" : 2,
+		"adresse" : {
+			"numero" : 18,
+			"nom" : "Passage de brebis",
+			"ville" : "Toulouse",
+			"pays" : "France"
+		},
+		"telephone" : "032801943",
+		"age" : 64,
+		"password" : "michmich"
+	},
+	{
+		"email":"allezlesverts42@sainte.com",
+		"nom" : "Lucas",
+		"prenom" : "Suchard",
+		"listRole" : ["membre", "administrateur"],
+		"note" : 5,
+		"adresse" : {
+			"numero" : 42,
+			"nom" : "Rue des stephanois",
+			"ville" : "Saint Etienne",
+			"pays" : "France"
+		},
+		"telephone" : "0738940219",
+		"age" : 28,
+		"password" : "hamoumatitulaire"
+	},
+	{
+		"email" : "clothilde.r@gmail.com",
+		"nom" : "Rouget",
+		"prenom" : "Clothilde",
+		"listRole" : ["membre"],
+		"note" : 3,
+		"adresse" : {
+			"numero" : 3,
+			"nom" : "Avenue des arbustes",
+			"ville" : "Mende",
+			"pays" : "France"
+		},
+		"telephone" : "0688726210",
+		"age" : 32,
+		"password" : "cloclolabest"
+
+	},
+	{
+		"email" : "jeconduismal06@gmail.com",
+		"nom" : "Jeconduis",
+		"prenom" : "Mal",
+		"listRole" : ["membre"],
+		"note" : 1,
+		"adresse" : {
+			"numero" : 93,
+			"nom" : "Rue quelconque",
+			"ville" : "Paris",
+			"pays" : "France"
+		},
+		"telephone" : "0659998347",
+		"age" : 18,
+		"password" : "gpaslepermis"
+	},
+	{
+		"email" : "jeconduismalaussi07",
+		"nom" : "George",
+		"prenom" : "Moustakwa",
+		"listRole" : ["membre"],
+		"note" : 0,
+		"adresse" : {
+			"numero" : 17,
+			"nom" : "Rue des rue de rue",
+			"ville" : "La plagne",
+			"pays" : "France"
+		},
+		"telephone" : "0765432110",
+		"age" : 83,
+		"password" : "toujoursdebout"
+	},
+	{
+		"email":"tartine@gmail.com",
+		"nom" : "Rochon",
+		"prenom" : "Marine",
+		"listRole" : ["membre"],
+		"note" : 5,
+		"adresse" : {
+			"numero" : 0,
+			"nom" : "Avenue des champs ",
+			"ville" : "Dunkerque",
+			"pays" : "France"
+		},
+		"telephone" : "0650009565",
+		"age" : 33,
+		"password" : "bidochon34"
+	}
+	{
+		"email":"bidochon34@yahoo.com",
+		"nom" : "Rochon",
+		"prenom" : "Andre",
+		"listRole" : ["membre"],
+		"note" : 2,
+		"adresse" : {
+			"numero" : 17,
+			"nom" : "Rue des rue de rue",
+			"ville" : "Dijon",
+			"pays" : "France"
+		},
+		"telephone" : "0611161611",
+		"age" : 33,
+		"password" : "marine46"
+	}
+]

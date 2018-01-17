@@ -1,0 +1,33 @@
+form{
+	width: 70%;
+	background-color: #2e81b7;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+form .bCreate{
+    float: left;
+    margin-top: 1%;
+	width: 22%;
+	margin-left: 2%;
+	height: 30px;
+	background-color: #ffffff;
+}
+
+form .bValid{
+    margin-top: 2%;
+    float: right;
+    width: 28%;
+    height: 30px;
+    background-color: #4caf50;
+    border-color: #4caf50;
+    border-style: none;
+    color : #fff;
+}

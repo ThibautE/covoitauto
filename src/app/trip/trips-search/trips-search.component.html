@@ -1,0 +1,10 @@
+<form>
+  	<input class="bSearch" [(ngModel)]="villeD" type="text" name="villeD" placeholder="Départ">
+	<input class="bSearch" [(ngModel)]="villeA" type="text" name="villeA" placeholder="Destination">
+	<input class="bSearch" [(ngModel)]="dateT" type="date" name="date" placeholder="Date">
+	<input class="bValid" type="submit" value="Rechercher" (onclick)="searchTrips()">
+</form>
+
+	<div *ngIf="villeD && villeA && dateT" >
+		recherche d'un trajet de {{villeD}} à {{villeA}}, le {{dateT}}
+	</div>

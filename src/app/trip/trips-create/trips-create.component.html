@@ -1,0 +1,16 @@
+<h3>Création d'un trajet :</h3>
+<form>
+  	<input class="bCreate" [(ngModel)]="villeD" type="text" name="villeD" placeholder="Ville de départ">
+  	<input class="bCreate" [(ngModel)]="adresseD" type="text" name="adresseD" placeholder="Adresse de départ">
+	<input class="bCreate" [(ngModel)]="villeA" type="text" name="villeA" placeholder="Ville de destination">
+  	<input class="bCreate" [(ngModel)]="adresseA" type="text" name="adresseA" placeholder="Adresse d'arrivée">
+	<input class="bCreate" [(ngModel)]="dateT" type="date" name="date" placeholder="Date">
+	<input class="bCreate" [(ngModel)]="voiture" type="text" name="voiture" placeholder="Information sur la voiture">
+	<input class="bCreate" [(ngModel)]="nbPlace" type="text" name="nbPlace" placeholder="Nombre de place">
+	<input class="bCreate" [(ngModel)]="prix" type="text" name="prix" placeholder="Prix">
+	<input class="bValid" type="submit" value="Créer ce trajet" (onclick)="createTrip()">
+</form>
+
+<div *ngIf="villeD && adresseD && villeA && adresseA && dateT && nbPlace && voiture && prix " >
+		<h3>Le trajet suivant va être créer :</h3> <br>Ville départ : {{villeD}} à l'adresse : {{adresseD}} <br>Ville arrivée : {{villeA}}, à l'adresse {{villeA}} <br>Date du trajet : {{dateT}}, <br> Information sur la voiture : {{voiture}} <br>Nombre de places disponible : {{nbPlace}} <br> Prix : {{prix}}€
+</div>

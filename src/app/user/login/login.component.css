@@ -1,0 +1,22 @@
+form{
+    border: none;
+    font-size: 16px;
+    margin: 4px 2px;
+}
+
+form input{
+    width: 90%;
+    height: 20px;
+}
+
+button {
+    background-color: #e54d42;
+    border: none;
+    color: white;
+    padding: 10px 30px;
+    text-align: center;
+    text-decoration: none;
+    margin: 4px;
+    margin-right: 8%;
+    float: right;
+}
