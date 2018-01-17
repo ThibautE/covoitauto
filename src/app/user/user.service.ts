@@ -1,13 +1,13 @@
-import {Injectable, isDevMode} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs/Observable';
-import {Headers} from '@angular/http';
+import { Injectable } from '@angular/core';
+import { HttpModule } from '@angular/http';
+import { Observable} from 'rxjs/Observable';
+import { Headers } from '@angular/http';
 import { environment } from '../../environments/environment';
 
 @Injectable()
 export class UserService {
     
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpModule) { }
 
     baseUrl = environment.apiUrl + ':' + environment.apiPort;
 

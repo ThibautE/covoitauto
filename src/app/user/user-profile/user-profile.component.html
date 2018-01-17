@@ -1,0 +1,34 @@
+<h2>Mon profil</h2>
+
+  <label>Nom : </label>
+         {{model.nom}}
+        <input [(ngModel)]="model.nom" type="text">
+
+  <label>Prenom</label>
+         {{model.prenom}}
+        <input [(ngModel)]="model.prenom" type="text">
+  <label>Adresse</label>
+         {{model.adresse}}
+
+        <input [(ngModel)]="model.adresse" type="text">
+
+  <label>Telephone</label>
+         {{model.telephone}}
+
+        <input [(ngModel)]="model.telephone" type="text">
+
+  <label>Age</label>
+         {{model.age}}
+        <input [(ngModel)]="model.age" type="text">
+
+  <label>Adresse mail</label>
+         {{model.mail}}
+        <input [(ngModel)]="model.mail" type="text">
+
+  <label>Mot de passe</label>
+        <input [(ngModel)]="model.password" type="password">
+
+  <label>Mes Vehicules</label>
+
+  <button (click)="submit()">Enregistrer les modifications</button>
+  <button [routerLink]="['/dashboard']"  class="btn btn-secondary">Annuler</button>

@@ -1,4 +1,4 @@
-<form *ngIf="!isLoggedIn" (ngSubmit)= "onSubmit()" #loginForm = "ngForm">
+<form *ngIf="!isLoggedIn" (ngSubmit)= "onSubmit()" >
 		<label for="username"> Login </label>
 		<input type="text" class ="form-control" id="username"  required placeholder="email" [(ngModel)]="username" name = "username"/><p></p>
 		<label for="pass">Password</label>
