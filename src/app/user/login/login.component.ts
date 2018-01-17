@@ -61,10 +61,6 @@ export class LoginComponent implements OnInit{
     return this.admin;
   }
 
-
-  /**
-   * Depuis les cookies de session, met à jour les infos de base (notamment pour les guards)
-   */
   private loadUser() {
     this.firstName = Cookie.get('firstName');
     this.lastName = Cookie.get('lastName');

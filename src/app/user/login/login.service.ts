@@ -1,29 +1,25 @@
-import { Injectable } from '@angular/core';
-import { Headers, Response } from '@angular/http';
-import { Http } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
+import {EventEmitter, Injectable, isDevMode, Output} from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import 'rxjs/add/operator/map'
+import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs/Subject';
+import { environment } from '../../../environments/environment';
+
 
 @Injectable()
 export class LoginService {
-    constructor(private http: Http) { }
+    
+    baseUrl = environment.apiUrl + ':' + environment.apiPort;
+    
+    @Output() change: EventEmitter<null> = new EventEmitter();
 
-    login(mail: string, password: string) {
-        return this.http.post('/users/login', { username: mail, password: password })
-            .map((response: Response) => {
-                // login successful if there's a jwt token in the response
-                let user = response.json();
-                if (user && user.token) {
-                    // store user details and jwt token in local storage to keep user logged in between page refreshes
-                    localStorage.setItem('currentUser', JSON.stringify(user));
-                }
+    subject: Subject<Observable<any>> = new Subject(); //générateur d'evenements pour AuthComponent
+    
+    constructor(private http: HttpClient) {}
 
-                return user;
-            });
-    }
-
-    logout() {
-        // remove user from local storage to log user out
-        localStorage.removeItem('currentUser');
+    public login(mail: string, password: string): Observable <any> {
+        var obs: Observable<any> = this.http.get<any>(this.baseUrl + '/membres/authenticate/' + mail + '/' + password);
+        this.subject.next(obs); 
+        return  obs;
     }
 }
