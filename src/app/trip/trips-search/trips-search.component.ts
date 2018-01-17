@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { TripService } from '../trip.service'; 
-import { Params, ActivatedRoute } from '@angular/router'
+import { Params, ActivatedRoute } from '@angular/router';
+import 'rxjs/Rx';
+
 
 @Component({
   selector: 'app-trips-search',
@@ -21,7 +23,7 @@ export class TripsSearchComponent implements OnInit {
 		});
 	}
 
-	empty(): boolean {
-		return (this.trips[0] == undefined);
-	}
+	// empty(): boolean {
+	// 	return (this.trips[0] == undefined);
+	// }
 }

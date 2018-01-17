@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
+import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import { environment } from '../../environments/environment';
+import 'rxjs/Rx';
 
 @Injectable()
 export class TripService {
 
-	constructor(private http : HttpClient) { }
+	constructor(private http : Http) { }
 
 	baseUrl = environment.apiUrl + ':' + environment.apiPort;
 	

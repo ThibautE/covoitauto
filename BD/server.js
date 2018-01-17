@@ -61,12 +61,12 @@ mongoClient.connect(url, function(error, db) {
 	});
 
 
-	app.get("/trips/:villeD/:villeA",function(req,res){
+	app.get("/trips/:cityD/:cityA",function(req,res){
 		console.log("trips ville départ et ville arrivé");
 		let filterObject = {'depart.ville' : null,'arrive.ville' : null};
 
-		if(req.params.villeD != "*"){filterObject['depart.ville'] = req.params.villeD;}
-		if(req.params.villeA != "*"){filterObject['arrive.ville'] = req.params.villeA;}
+		if(req.params.cityD != "*"){filterObject['depart.ville'] = req.params.cityD;}
+		if(req.params.cityA != "*"){filterObject['arrive.ville'] = req.params.cityA;}
 		trajetResearch(db,{"message" : "/trips","filterObject": filterObject},function(step,results){
 			console.log("\n" + step + "avec" + results.length + "trajets selectionnés : ");
 			res.setHeader("Content-type","application/json; charset = UTF-8");

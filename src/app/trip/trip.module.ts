@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-
+import 'rxjs/Rx';
 
 import { AuthGuard } from '../guards/auth-guard';
 
@@ -26,14 +27,15 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'tripSearch/:cityD/:cityA/:Date',
-    component: TripsSearchComponent
+    path: 'search/:cityD/:cityA/:date',
+    component: TripsSearchComponent,
+    outlet: 'trip'
   },
 ];
 
 @NgModule({
   imports: [
-    CommonModule, FormsModule, ReactiveFormsModule, RouterModule.forChild(routes)
+    CommonModule, FormsModule, HttpClientModule, ReactiveFormsModule, RouterModule.forChild(routes)
   ],
   exports: [RouterModule, TripsCreateComponent, TripsDisplayComponent, TripsSearchComponent],
   declarations: [TripsCreateComponent, TripsDisplayComponent, TripsSearchComponent],

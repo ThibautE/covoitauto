@@ -3,7 +3,7 @@
 		<input type="text" class ="form-control" id="username"  required placeholder="email" [(ngModel)]="username" name = "username"/><p></p>
 		<label for="pass">Password</label>
 		<input type="password" class ="form-control" id="pass"  required placeholder="password" [(ngModel)]="pass" name = "pass"/><p></p>
-	<button type = "Submit">Se connecter</button>
+	<button [routerLink]="['/inscription']">Se connecter</button>
 </form>
 <div *ngIf="isLoggedIn">
 	Bonjour {{username}}! Vous êtes connecté
