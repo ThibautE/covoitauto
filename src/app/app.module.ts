@@ -2,9 +2,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms'; 
 import { AppComponent } from './app.component';
-import { AuthentificationService, UserService } from './services/index';
 import { HttpModule } from '@angular/http';
 import { AppRoutingModule } from './app-routing.module';
+
+//services
+import { AuthentificationService } from './user/authentification.service';
+import { UserService } from './user/user.service';
+import { TripService } from './trip/trip.service';
 
 //composants
 import { TripsSearchComponent } from './trip/trips-search/trips-search.component';
@@ -32,8 +36,8 @@ import { AdminPanelComponent } from './user/admin-panel/admin-panel.component';
   ],
   exports: [ //penser a exports les modules dans les features modules, (ceux qui seront utiliser par le module parent)
   ],
-  providers: [AuthentificationService, UserService],
-  bootstrap: [AppComponent]
+  providers: [ AuthentificationService, UserService, TripService ],
+  bootstrap: [ AppComponent ]
 })
 
 
