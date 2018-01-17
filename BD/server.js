@@ -6,6 +6,7 @@ let assert = require('assert');
 
 app.listen(8888);
 app.use(cors());
+app.use(express.json());
 
 let mongoClient = require("mongodb").MongoClient;
 let ObjectId = require("mongodb").ObjectId;
@@ -50,6 +51,8 @@ mongoClient.connect(url, function(error, db) {
 	assert.equal(null,error);
 	console.log("Connecté à la base de données covoitauto");
 
+	// Requête pour les trips 
+
 	app.get("/trips",function(req,res){
 		trajetAll(db,{"message" : "/trips"},function(step,results){
 			console.log("\n" + step + "avec" + results.length + "trajets selectionnés : ");
@@ -60,6 +63,27 @@ mongoClient.connect(url, function(error, db) {
 		});
 	});
 
+	//chercher les trips d'après une ville départ, une ville arrivé et une date
+	app.get("/search/:cityD/:cityA/:date", function(req,res){
+		db.collection("trips").find(
+			{
+				'depart.ville' : {$regex : new RegExp("^" + req.params.cityD.toLowerCase(), "i")},
+				'arrive.ville' : {$regex : new RegExp("^" + req.params.cityA.toLowerCase() + 'i')},
+				'date' : {$d : req.params.date}   
+			}).toArray(function(err, trips) {
+				if(err || trips == undefined){
+					var json = JSON.stringify([]);
+					res.setHeader("Content-type","application/json");
+					res.end(json);					
+				}
+				else{
+					var json = JSON.stringify(trips);
+					res.setHeader("Content-type","application/json");
+					res.end(json);	
+				}
+			})
+		}
+	)
 
 	app.get("/trips/:cityD/:cityA",function(req,res){
 		console.log("trips ville départ et ville arrivé");
@@ -88,7 +112,8 @@ mongoClient.connect(url, function(error, db) {
 			res.end(json);
 		});
 	});
-	//Authentification
+
+	//Requêtes pour users 
 	app.get("/auth/login=:login/mdp=:mdp",function(req,res){
 		console.log ("Authentification");
 		let login  = req.params.login;
