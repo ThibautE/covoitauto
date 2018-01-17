@@ -5,6 +5,15 @@
 	<input class="bValid" type="submit" value="Rechercher" (onclick)="searchTrips()">
 </form>
 
-	<div *ngIf="villeD && villeA && dateT" >
-		recherche d'un trajet de {{villeD}} à {{villeA}}, le {{dateT}}
+
+	<div *ngIf= "!empty()" >
+		<li *ngFor="let trip of (trips)"> 
+            <label *ngIf=" trip.date > today.getTime()"  > {{trip.depart.ville}} à {{trip.arrive.ville}} pour {{trip.prix}} €
+			<label *ngIf="trip.place != 0"> il reste {{trip.place}} !</label>
+			<label *ngIf="trip.place == 0" class="warning"> [Plus de place disponible !]</label></label>
+        </li>
 	</div>
+	<div *ngIf= "empty()">
+		<p> Aucun covoiturage n'est proposé pour votre recherche.</p>
+	</div>
+ 

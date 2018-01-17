@@ -26,7 +26,7 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'trip-details/:tripID',
+    path: 'tripSearch/:cityD/:cityA/:Date',
     component: TripsSearchComponent
   },
 ];
