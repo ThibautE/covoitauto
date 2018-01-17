@@ -23,7 +23,7 @@ export class TripsSearchComponent implements OnInit {
 		});
 	}
 
-	// empty(): boolean {
-	// 	return (this.trips[0] == undefined);
-	// }
+	empty(): boolean {
+	 	return (this.trips == undefined);
+	}
 }

@@ -12,14 +12,14 @@ export class TripService {
 
 	baseUrl = environment.apiUrl + ':' + environment.apiPort;
 	
-
+/*
 	create(model: any): Observable <any>{
 		let tripUrl: string = this.baseUrl + '/trajets';
 		let body: any = model;
 		let headers = new Headers({'Content-Type': 'application/json'});
 		
 		return this.http.post(tripUrl, body, headers);
-	}
+	}*/
 
 	getAllTrips(): Observable <any>{
 		let tripUrl: string = this.baseUrl + '/trip/allTrip';

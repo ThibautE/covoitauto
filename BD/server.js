@@ -3,8 +3,6 @@ let cors = require ("cors");
 let app = express();
 let assert = require('assert');
 
-
-app.listen(8888);
 app.use(cors());
 app.use(express.json());
 
@@ -13,53 +11,25 @@ let ObjectId = require("mongodb").ObjectId;
 
 let url = "mongodb://localhost:8888/covoitauto";
 
-function trajetResearch(db,param,callback){
-	db.collection("trips").find(param["filterObject"]).toArray(function(err,documents){
-		if (err)
-			callback(err,[]);
-		else if (documents !== undefined) 
-			callback(param["message"],documents);
-		else
-			callback(param["message"],[]);
-	});
-}
-
-function allTrips(db,param,callback){
-	console.log("trajetAll");
-	db.collection("trips").find().toArray(function(err,documents){
-		if (err)
-			callback(err,[]);
-		else if (documents !== undefined) 
-			callback(param["message"],documents);
-		else
-			callback(param["message"],[]);
-	});
-}
-
-function priceTrip(db,param,callback){
-	db.collection("trips").find(param["filterObject"]).toArray(function(err,documents){
-		if (err)
-			callback(err,[]);
-		else if (documents !== undefined) 
-			callback(param["message"],documents);
-		else
-			callback(param["message"],[]);
-	});
-}
-
 mongoClient.connect(url, function(error, db) {
 	assert.equal(null,error);
 	console.log("Connecté à la base de données covoitauto");
 
-	// Requête pour les trips 
+	// ---- Requête pour les trips ----
 
-	app.get("/trips",function(req,res){
-		trajetAll(db,{"message" : "/trips"},function(step,results){
-			console.log("\n" + step + "avec" + results.length + "trajets selectionnés : ");
-			res.setHeader("Content-type","application/json; charset = UTF-8");
-			let json = JSON.stringify(results);
-			console.log(json);
-			res.end(json);
+	// chercher tous les trips
+	app.get("/all",function(req,res){
+		db.collection("trips").find().toArray(function(err, trips){
+			if(err || trips == undefined){
+				var json = JSON.stringify([]);
+				res.setHeader("Content-type","application/json; charset = UTF-8");
+				res.end(json);	
+			}
+			else {
+				var json = JSON.stringify(trips);
+				res.setHeader("Content-type","application/json; charset = UTF-8");
+				res.end(json);
+			}
 		});
 	});
 
@@ -73,32 +43,38 @@ mongoClient.connect(url, function(error, db) {
 			}).toArray(function(err, trips) {
 				if(err || trips == undefined){
 					var json = JSON.stringify([]);
-					res.setHeader("Content-type","application/json");
+					res.setHeader("Content-type","application/json; charset = UTF-8");
 					res.end(json);					
 				}
 				else{
 					var json = JSON.stringify(trips);
-					res.setHeader("Content-type","application/json");
+					res.setHeader("Content-type","application/json; charset = UTF-8");
 					res.end(json);	
 				}
-			})
+			});
 		}
-	)
+	);
 
+	// chercher les trips par ville Départ et ville D'arrivée
 	app.get("/trips/:cityD/:cityA",function(req,res){
-		console.log("trips ville départ et ville arrivé");
-		let filterObject = {'depart.ville' : null,'arrive.ville' : null};
-
-		if(req.params.cityD != "*"){filterObject['depart.ville'] = req.params.cityD;}
-		if(req.params.cityA != "*"){filterObject['arrive.ville'] = req.params.cityA;}
-		trajetResearch(db,{"message" : "/trips","filterObject": filterObject},function(step,results){
-			console.log("\n" + step + "avec" + results.length + "trajets selectionnés : ");
-			res.setHeader("Content-type","application/json; charset = UTF-8");
-			let json = JSON.stringify(results);
-			console.log(json);
-			res.end(json);
-		});
-	});
+		db.collection("trips").find(
+			{
+				'depart.ville' : {$regex : new RegExp("^" + req.params.cityD.toLowerCase(), "i")},
+				'arrive.ville' : {$regex : new RegExp("^" + req.params.cityA.toLowerCase() + 'i')},  
+			}).toArray(function(err, trips) {
+				if(err || trips == undefined){
+					var json = JSON.stringify([]);
+					res.setHeader("Content-type","application/json; charset = UTF-8");
+					res.end(json);					
+				}
+				else{
+					var json = JSON.stringify(trips);
+					res.setHeader("Content-type","application/json; charset = UTF-8");
+					res.end(json);	
+				}
+			});
+		}
+	);
 
 	app.get("/trips/:prix",function(req,res){
 		let filterObject = {};
@@ -150,4 +126,8 @@ mongoClient.connect(url, function(error, db) {
 		    	res.end(JSON.stringify(doc));
 		    });
 	});
+
+	db.close();
 });
+
+app.listen(8888);

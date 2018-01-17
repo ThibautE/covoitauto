@@ -22,7 +22,7 @@ const routes: Routes = [
     //canActivate: [AuthGuard]
   },
   {
-    path: 'reservations',
+    path: 'all',
     component: TripsDisplayComponent,
     canActivate: [AuthGuard]
   },

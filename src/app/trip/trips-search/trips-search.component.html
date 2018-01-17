@@ -6,14 +6,14 @@
 </form>
 
 
-	<!-- <div *ngIf= "!empty()" > -->
+	<div *ngIf= "!empty()" >
 		<li *ngFor="let trip of (trips)"> 
             <label *ngIf=" trip.date > today.getTime()"  > {{trip.depart.ville}} à {{trip.arrive.ville}} pour {{trip.prix}} €
 			<label *ngIf="trip.place != 0"> il reste {{trip.place}} !</label>
 			<label *ngIf="trip.place == 0" class="warning"> [Plus de place disponible !]</label></label>
         </li>
-	<!-- </div> -->
-	<!-- <div *ngIf= "empty()">
+	</div> 
+	<div *ngIf= "empty()">
 		<p> Aucun covoiturage n'est proposé pour votre recherche.</p>
 	</div>
-  -->
+  
