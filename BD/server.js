@@ -1,18 +1,18 @@
 let express = require ("express");
 let cors = require ("cors");
-let app = express();
 let assert = require('assert');
 
+
+let app = express();
 app.use(cors());
 app.use(express.json());
 
 let mongoClient = require("mongodb").MongoClient;
 let ObjectId = require("mongodb").ObjectId;
-
 let url = "mongodb://localhost:8888/covoitauto";
 
-mongoClient.connect(url, function(error, db) {
-	assert.equal(null,error);
+mongoClient.connect(url, function(err, db) {
+	assert.equal(null,err);
 	console.log("Connecté à la base de données covoitauto");
 
 	// ---- Requête pour les trips ----
