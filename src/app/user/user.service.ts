@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable} from 'rxjs/Observable';
-import { Headers } from '@angular/http';
 import { environment } from '../../environments/environment';
 
 @Injectable()
@@ -13,8 +12,8 @@ export class UserService {
 
     create(model: any): Observable <any> {
         const url: string = this.baseUrl + '/user';
-        const headers = new Headers({'Content-Type': 'application/json'});
-        return this.http.post(url, model, headers);
+        const headers = new HttpHeaders({'Content-Type': 'application/json'});
+        return this.http.post(url, model, {headers});
     }
 
     getByID(id: string): Observable <any> {
@@ -23,7 +22,7 @@ export class UserService {
 
     update(model: Object): Observable<any> {
         const url: string = this.baseUrl + '/user/update';
-        const headers = new Headers({'Content-Type': 'application/json'});
-        return this.http.post(url, model, headers);
+        const headers = new HttpHeaders({'Content-Type': 'application/json'});
+        return this.http.post(url, model, {headers});
   }
 }

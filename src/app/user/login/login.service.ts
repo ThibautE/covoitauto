@@ -8,7 +8,7 @@ import { environment } from '../../../environments/environment';
 
 @Injectable()
 export class LoginService {
-    
+
     baseUrl = environment.apiUrl + ':' + environment.apiPort;
     
     @Output() change: EventEmitter<null> = new EventEmitter();
@@ -18,8 +18,8 @@ export class LoginService {
     constructor(private http: HttpClient) {}
 
     public login(mail: string, password: string): Observable <any> {
-        var obs: Observable<any> = this.http.get<any>(this.baseUrl + '/membres/authenticate/' + mail + '/' + password);
+        var obs: Observable<any> = this.http.get<any>(this.baseUrl + '/user/login/' + mail + '/' + password);
         this.subject.next(obs); 
-        return  obs;
+        return obs;
     }
 }

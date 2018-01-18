@@ -1,6 +1,6 @@
 [
 	{
-		"email":"xKiller34@yopmail.com",
+		"mail":"xKiller34@yopmail.com",
 		"nom" : "Paul",
 		"prenom" : "Arnold",
 		"listRole" : ["membre"],
@@ -16,7 +16,7 @@
 		"password" : "password"
 	},
 	{
-		"email":"jean.michel@gmail.com",
+		"mail":"jean.michel@gmail.com",
 		"nom" : "Michel",
 		"prenom" : "Jean",
 		"listRole" : ["membre"],
@@ -32,7 +32,7 @@
 		"password" : "michmich"
 	},
 	{
-		"email":"allezlesverts42@sainte.com",
+		"mail":"allezlesverts42@sainte.com",
 		"nom" : "Lucas",
 		"prenom" : "Suchard",
 		"listRole" : ["membre", "administrateur"],
@@ -48,7 +48,7 @@
 		"password" : "hamoumatitulaire"
 	},
 	{
-		"email" : "clothilde.r@gmail.com",
+		"mail" : "clothilde.r@gmail.com",
 		"nom" : "Rouget",
 		"prenom" : "Clothilde",
 		"listRole" : ["membre"],
@@ -65,7 +65,7 @@
 
 	},
 	{
-		"email" : "jeconduismal06@gmail.com",
+		"mail" : "jeconduismal06@gmail.com",
 		"nom" : "Jeconduis",
 		"prenom" : "Mal",
 		"listRole" : ["membre"],
@@ -81,7 +81,7 @@
 		"password" : "gpaslepermis"
 	},
 	{
-		"email" : "jeconduismalaussi07",
+		"mail" : "jeconduismalaussi07",
 		"nom" : "George",
 		"prenom" : "Moustakwa",
 		"listRole" : ["membre"],
@@ -97,7 +97,7 @@
 		"password" : "toujoursdebout"
 	},
 	{
-		"email":"tartine@gmail.com",
+		"mail":"tartine@gmail.com",
 		"nom" : "Rochon",
 		"prenom" : "Marine",
 		"listRole" : ["membre"],
@@ -113,7 +113,7 @@
 		"password" : "bidochon34"
 	}
 	{
-		"email":"bidochon34@yahoo.com",
+		"mail":"bidochon34@yahoo.com",
 		"nom" : "Rochon",
 		"prenom" : "Andre",
 		"listRole" : ["membre"],
