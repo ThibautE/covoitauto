@@ -12,11 +12,6 @@ let ObjectId = require("mongodb").ObjectId;
 let url = "mongodb://localhost:8888/covoitauto";
 
 
-const sendRes = function(res, json){
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Content-type","application/json");
-    res.end(json);
-};
 
 app.all("/*", function(req, res, next){
   res.header('Access-Control-Allow-Origin', '*');
@@ -72,7 +67,7 @@ mongoClient.connect(url, function(err, db) {
 	
 	// chercher tous les trips
 	app.get("/trip/all",function(req,res){
-		db.collection("trips").find().toArray(function(err, trips){
+		db.collection("trips").find().toArray(function(err, trip){
 			if(err || trips == undefined){
 				var json = JSON.stringify([]);
 				res.setHeader("Content-type","application/json; charset = UTF-8");
@@ -129,35 +124,56 @@ mongoClient.connect(url, function(err, db) {
 		}
 	);
 
-	app.get("/trips/:prix",function(req,res){
-		let filterObject = {};
-		if(req.params.prix != "*"){filterObject.prix = parseInt(req.params.prix);}
-
-		trajetPrix(db,{"message" : "/trips","filterObject": filterObject},function(step,results){
-			console.log("\n" + step + "avec" + results.length + "trajets selectionnés : ");
-			res.setHeader("Content-type","application/json; charset = UTF-8");
-			let json = JSON.stringify(results);
-			console.log(json);
-			res.end(json);
-		});
-	});
-
 	//Requêtes pour users 
 	app.get("/user/login/:mail/:password",function(req,res){
 		var user = database.collection('users').find({'mail':req.params.mail, 'password':req.params.password});
     	
     	user.toArray(function(err,documents){
 
-      if(documents && documents[0] && documents[0].password){
-        delete documents[0].password; 
-      }
+      		if(documents && documents[0] && documents[0].password){
+        		delete documents[0].password; 
+      		}
 
-      console.log(documents);
-      var json=JSON.stringify(documents);
-      sendRes(res, json)
-    });
+      		console.log(documents);
+      		var json=JSON.stringify(documents);
+	  		res.setHeader("Access-Control-Allow-Origin", "*");
+	  		res.setHeader("Content-type","application/json");
+	 		res.end(json);
+
+    	});
 	});
 
+
+	// inscriptions user 
+	app.get("/user/create", function(req, res) {
+		
+		if(!req.body){
+			return res.sendStatus(400);
+		  }
+
+		  var newUser = {
+			"prenom" : req.body.firstname,
+			"nom" : req.body.lastname,
+			"mail" : req.body.email,
+			"password" : req.body.password,
+			"age" : parseInt(req.body.age),
+			"voiture" : req.body.car,
+			"telephone" : req.body.phone
+	  };
+
+	  db.collection("users").insertOne(newUser, function(err, user) {
+		  if(err || user == undefined) {
+			  var json = JSON.stringify([]);
+			  res.setHeader("Content-type","application/json; charset = UTF-8");
+			  res.end(json);	
+		  }
+		  else{
+			  var json = JSON.stringify(user);
+			  res.setHeader("Content-type","application/json; charset = UTF-8");
+			  res.end(json);
+		  }
+	  });
+	})
 
 	//delete user
 	app.delete("/user/:mail/",function(req,res){

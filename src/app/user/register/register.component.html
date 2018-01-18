@@ -1,46 +1,17 @@
-<div class="col-md-4 col-md-offset-3">
+<div>
   <h2>Inscription</h2>
+    <form name="proposeForm" (ngSubmit)="proposeForm.form.valid && onSubmit()" #proposeForm="ngForm">
+        <input class="bCreate" [(ngModel)]="newUser.firstname" type="text" name="prenom" placeholder="ex: Alain">
+        <input class="bCreate" [(ngModel)]="newUser.lastname" type="text" name="nom" placeholder="ex: Deloin">
+      <input class="bCreate" [(ngModel)]="newUser.email" type="text" name="mail" placeholder="ex: covoit@auto.fr">
+        <input class="bCreate" [(ngModel)]="newUser.password" type="text" name="password" placeholder="ex: a2b5rr4">
+      <input class="bCreate" [(ngModel)]="newUser.age" type="date" name="age" placeholder="ex: 22">
+      <input class="bCreate" [(ngModel)]="newUser.car" type="text" name="voiture" placeholder="ex: clio">
+      <input class="bCreate" [(ngModel)]="newUser.phone" type="text" name="telephone" placeholder="ex: 0625487984">
+      <input class="bValid" type="submit" value="Valider inscription">
+    </form> 
+</div>
 
-  <form name="form" (ngSubmit)="f.form.valid && register()" #f="ngForm" novalidate>
-    <div [ngClass]="{ 'has-error': f.submitted && !mail.valid }">
-      <label for="prenom">Prenom</label>
-      <input type="text" class="form-control" name="prenom" [(ngModel)]="model.prenom" #prenom="ngModel" required />
-      <div *ngIf="f.submitted && !prenom.valid" class="err">Le prénom est obligatoire</div>
-    </div>
-
-    <div [ngClass]="{ 'has-error': f.submitted && !mail.valid }">
-      <label for="nom">Nom</label>
-      <input type="text" class="form-control" name="nom" [(ngModel)]="model.nom" #nom="ngModel" required />
-      <div *ngIf="f.submitted && !nom.valid" class="err">Le nom est obligatoire</div>
-    </div>
-
-    <div [ngClass]="{ 'has-error': f.submitted && !telephone.valid }">
-      <label for="telephone">Telephone</label>
-      <input type="text" class="form-control" name="telephone" [(ngModel)]="model.telephone" #telephone="ngModel" required/>
-      <div *ngIf="f.submitted && !telephone.valid" class="err">Le numéro est obligatoire</div>
-    </div>
-
-    <div [ngClass]="{ 'has-error': f.submitted && !age.valid }">
-      <label for="age">Votre Age</label>
-      <input type="text" class="form-control" name="age" [(ngModel)]="model.age" #age="ngModel" required />
-      <div *ngIf="f.submitted && !age.valid" class="err">L'age est obligatoire</div>
-    </div>
-
-    <div [ngClass]="{ 'has-error': f.submitted && !mail.valid }">
-      <label for="mail">Email</label>
-      <input type="text" class="form-control" name="mail" [(ngModel)]="model.mail" #mail="ngModel" required pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" />
-      <div *ngIf="f.submitted && !mail.valid" class="err">Un email est obligatoire</div>
-    </div>
-
-    <div [ngClass]="{ 'has-error': f.submitted && !password.valid }">
-      <label for="password">Mot de passe</label>
-      <input type="password" class="form-control" name="password" [(ngModel)]="model.password" #password="ngModel" required />
-      <div *ngIf="f.submitted && !password.valid" class="err">Le mot de passe est obligatoire</div>
-    </div>
-    <div>
-      <button [disabled]="loading" class="btn btn-primary">Inscription</button>
-      <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
-      <a [routerLink]="['/login']" class="btn btn-link">Annuler</a>
-    </div>
-  </form>
+<div>
+	<p> {{message}} </p>
 </div>
