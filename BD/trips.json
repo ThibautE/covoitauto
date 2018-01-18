@@ -1,17 +1,14 @@
 [
 	{
-		"conducteur" : "xKiller34@yopmail.com",
+		"driver" : "xKiller34@yopmail.com",
 		"date" : "01/01/2018",
 		"place" : 2,
-		"participant" : ["jean.michel@gmail.com"],
-		"distance" : 134,
-		"temps_moyen": 120,
+		"passagers" : ["jean.michel@gmail.com"],
 		"depart" : {
 			"numero" : 12,
 			"nom" : "Avenue Carnot",
 			"ville" : "Toulouse",
 			"pays" : "France"
-
 		},
 		"arrive" :{
 			"numero" :4,
@@ -19,6 +16,8 @@
 			"ville" : "Narbonne",
 			"pays" : "France"
 		},
+		"distance" : 134,
+		"temps_moyen": 120,
 		"voiture": {
 			"marque" : "BMW",
 			"modele" : "X5",
@@ -27,12 +26,10 @@
 		"prix":16
 	},
 	{
-		"conducteur" : "allezlesverts42@sainte.com",
+		"driver" : "allezlesverts42@sainte.com",
 		"date" : "01/01/2018",
 		"place" : 2,
-		"participant" : ["clothilde.r@gmail.com"],
-		"distance" : 306,
-		"temps_moyen": 250,
+		"passagers" : ["clothilde.r@gmail.com"],
 		"depart" : {
 			"numero" : 9,
 			"nom" : "Avenue de Paul",
@@ -46,6 +43,8 @@
 			"ville" : "Marseille",
 			"pays" : "France"
 		},
+		"distance" : 306,
+		"temps_moyen": 250,
 		"voiture": {
 			"marque" : "Opel",
 			"modele" : "Corsa",
@@ -54,12 +53,10 @@
 		"prix":34
 	},
 	{
-		"conducteur" : "jeconduismal06@gmail.com",
+		"driver" : "jeconduismal06@gmail.com",
 		"date" : "01/01/2018",
 		"place" : 4,
-		"participant" : ["jeconduismalaussi07@gmail.com","tartine@gmail.com", "bidochon34@yahoo.com"],
-		"distance" : 500,
-		"temps_moyen": 430,
+		"passagers" : ["jeconduismalaussi07@gmail.com","tartine@gmail.com", "bidochon34@yahoo.com"],
 		"depart" : {
 			"numero" : 4,
 			"nom" : "Avenue de la glisse",
@@ -73,6 +70,8 @@
 			"ville" : "Paris",
 			"pays" : "France"
 		},
+		"distance" : 500,
+		"temps_moyen": 430,
 		"voiture": {
 			"marque" : "Opel",
 			"modele" : "Zafira",
