@@ -14,7 +14,11 @@ export class TripService {
 	
 
 	create(model: any): Observable <any>{
+<<<<<<< HEAD
+		let tripUrl: string = this.baseUrl + '/trip/create';
+=======
 		let tripUrl: string = this.baseUrl + '/create';
+>>>>>>> 3cc0cccfd6228aa8e9e8c39b0f75c01dda3abee0
 		let body: any = model;
 		const headers = new HttpHeaders({ 'Content-Type': 'application/json' });		
 		return this.http.post(tripUrl, body, {headers});
@@ -34,15 +38,6 @@ export class TripService {
 	getTripByParams(searchParams): Observable <any> {
 		
 			let tripUrl: string = this.baseUrl + '/trip/search/' + searchParams.cityA + '/' + searchParams.cityD + '/' + searchParams.dateD;
-			
-			/*
-			tripUrl += '?';
-		
-			tripUrl += '&orderBy=' + (searchParams.orderBy || 'heure'); // paramètres de recherche et leur valeurs par défaut
-			tripUrl += '&prixMax=' + (searchParams.prixMax || 9999) ;
-			tripUrl += '&evalMin=' + (searchParams.evalMin || 0);
-			*/
-
 			return this.http.get(tripUrl);
 		  }
 		
