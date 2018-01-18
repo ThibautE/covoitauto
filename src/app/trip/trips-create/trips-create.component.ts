@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { TripService } from '../trip.service'; 
+import {Cookie} from 'ng2-cookies';
+import { Params, ActivatedRoute } from '@angular/router';
+import { empty } from 'rxjs/Observer';
 
 @Component({
   selector: 'app-trips-create',
@@ -8,24 +12,48 @@ import { Component, OnInit } from '@angular/core';
 
 export class TripsCreateComponent implements OnInit {
 
-	villeD : string;
-	adresseD : string;
-	villeA : string;
-	adresseA : string;
-	dateT : Date;
-	voiture : string;
-	nbPlace : string;
-	prix : number;
+	/*
+	cityD : string;
+	addressD : string;
+	cityA : string;
+	addressA : string;
+	date : Date;
+	car : string;
+	nbPlaces : string;
+	price : number;
 	cpt : number = 0;
+	*/
 
-	constructor() { }
+	newTrip : any = [];
+	reponse : any;
+	message : string;
+
+
+	constructor(private tripService: TripService,) { }
 
 	ngOnInit() {
 
+		this.newTrip.date = new Date();
+		this.newTrip.date.today();
+		this.newTrip.places = 3;
+
+		this.message = "";
+
 	}
 
-	createTrip(){
-  		//push dans la bdd
-  	}
+	onSubmit() {
+
+		if(this.newTrip.date == undefined || this.newTrip.places == 0 || this.newTrip.places == undefined || this.newTrip.date < this.newTrip.date.today() ||
+		   this.newTrip.cityD == undefined || this.newTrip.cityA == undefined || this.newTrip.price == undefined){
+			this.message = "Un problème à eu lieu, veuillez remplir tous les champs obligatoires.";
+		}
+		else {
+			this.newTrip.conducteur = Cookie.get('_id');
+			this.tripService.create(this.newTrip).subscribe((res => {
+				this.reponse = res;
+				this.message = "Votre trajet à bien été enregistré !";
+			}));
+		}		
+	}
 
 }

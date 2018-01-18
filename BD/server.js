@@ -17,6 +17,37 @@ mongoClient.connect(url, function(err, db) {
 
 	// ---- Requête pour les trips ----
 
+	// creation de trips
+	app.post('/create', function (req, res) {
+		
+			if(!req.body){
+			  return res.sendStatus(400);
+			}
+
+			var newTrip = {
+			  "depart" : {"ville" : req.body.cityD, "adresse" : req.body.addressD},
+			  "arrivee" : {"ville" : req.body.cityA, "adresse" : req.body.addressA},
+			  "date" : req.body.date,
+			  "prix" : parseFloat(req.body.price),
+			  "nbPlaces" : req.body.places,
+			  "conducteur" : req.body.conducteur,
+			  "passagers" : []
+		};
+
+		db.collection("trips").insertOne(newTrip, function(err, trips) {
+			if(err || trips == undefined) {
+				var json = JSON.stringify([]);
+				res.setHeader("Content-type","application/json; charset = UTF-8");
+				res.end(json);	
+			}
+			else{
+				var json = JSON.stringify(trips);
+				res.setHeader("Content-type","application/json; charset = UTF-8");
+				res.end(json);
+			}
+		});
+	});
+	
 	// chercher tous les trips
 	app.get("/all",function(req,res){
 		db.collection("trips").find().toArray(function(err, trips){

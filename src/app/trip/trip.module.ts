@@ -12,6 +12,7 @@ import { TripService } from './trip.service';
 import { TripsCreateComponent } from './trips-create/trips-create.component';
 import { TripsDisplayComponent } from './trips-display/trips-display.component';
 import { TripsSearchComponent } from './trips-search/trips-search.component';
+import { TripsDetailsComponent } from './trips-details/trips-details.component';
 
 
 const routes: Routes = [
@@ -38,7 +39,7 @@ const routes: Routes = [
     CommonModule, FormsModule, HttpClientModule, ReactiveFormsModule, RouterModule.forChild(routes)
   ],
   exports: [RouterModule, TripsCreateComponent, TripsDisplayComponent, TripsSearchComponent],
-  declarations: [TripsCreateComponent, TripsDisplayComponent, TripsSearchComponent],
+  declarations: [TripsCreateComponent, TripsDisplayComponent, TripsSearchComponent, TripsDetailsComponent],
   providers: [TripService, AuthGuard]
 })
 
