@@ -18,10 +18,6 @@ const routes: Routes = [
     component: LoginUComponent,
   },
   {
-    path: 'connexion',
-    component: LoginComponent,
-  },
-  {
     path: 'register',
     component: RegisterComponent,
   },

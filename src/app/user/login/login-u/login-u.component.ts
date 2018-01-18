@@ -1,6 +1,7 @@
 import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoginService } from '../login.service';
+import { Message, MessagesModule } from 'primeng/primeng';
 
 @Component({
   selector: 'app-login-u',
@@ -12,10 +13,14 @@ import { LoginService } from '../login.service';
 export class LoginUComponent implements OnInit {
     
   model: any = {};
+  mail : string;
+  password: string;
+
 
   loading = false;
   returnUrl: string; 
-  
+  msgs: Message[] =  [];
+
   constructor(private route: ActivatedRoute, private router: Router, private loginService : LoginService) { }
 
   ngOnInit() {
@@ -31,12 +36,12 @@ export class LoginUComponent implements OnInit {
 
   login() {
     this.loading = true;
-    this.loginService.login(this.model.mail, this.model.password)
+    this.loginService.login(this.mail, this.password)
       .subscribe(res => {
         this.loading = false;
         if (res[0]) {
           if (this.returnUrl === '/') {
-            this.returnUrl = '/dashboard';
+            this.returnUrl = '/profile';
           }
           this.router.navigate([this.returnUrl]);
         }else {

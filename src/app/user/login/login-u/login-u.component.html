@@ -6,10 +6,10 @@
 	</div>
 	<div [ngClass]="{ 'has-error': f.submitted && !mail.valid }">
     	<label for="password">Mot de passe</label>
-		<input type="text" class ="form-control" id="password"  required placeholder="email" [(ngModel)]="password" name = "password"/><p></p>
+		<input type="text" class ="form-control" id="password"  required placeholder="mot de passe" [(ngModel)]="password" name = "password"/><p></p>
     	<div *ngIf="f.submitted && !password.valid" class="err">Veuillez saisir un mot de passe valide</div>
 	</div>
-	<button [routerLink]="['/connexion']">Se connecter</button>
+	<button>Se connecter</button>
 </form>
 <div *ngIf="isLoggedIn">
 	Bonjour {{username}}! Vous êtes connecté
