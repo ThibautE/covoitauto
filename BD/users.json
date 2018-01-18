@@ -1,8 +1,8 @@
 [
 	{
 		"mail":"xKiller34@yopmail.com",
-		"firstname" : "Paul",
-		"lastname" : "Arnold",
+		"nom" : "Paul",
+		"prenom" : "Arnold",
 		"adresse" : {
 			"numero" : 2,
 			"nom" : "Avenue de France",
@@ -17,8 +17,8 @@
 	},
 	{
 		"mail":"jean.michel@gmail.com",
-		"firstname" : "Michel",
-		"lastname" : "Jean",
+		"nom" : "Michel",
+		"prenom" : "Jean",
 		"adresse" : {
 			"numero" : 18,
 			"nom" : "Passage de brebis",
@@ -33,8 +33,8 @@
 	},
 	{
 		"mail":"allezlesverts42@sainte.com",
-		"firstname" : "Lucas",
-		"lastname" : "Suchard",
+		"nom" : "Lucas",
+		"prenom" : "Suchard",
 		"adresse" : {
 			"numero" : 42,
 			"nom" : "Rue des stephanois",
@@ -49,8 +49,8 @@
 	},
 	{
 		"mail" : "clothilde.r@gmail.com",
-		"firstname" : "Rouget",
-		"lastname" : "Clothilde",
+		"nom" : "Rouget",
+		"prenom" : "Clothilde",
 		"adresse" : {
 			"numero" : 3,
 			"nom" : "Avenue des arbustes",
@@ -65,8 +65,8 @@
 	},
 	{
 		"mail" : "jeconduismal06@gmail.com",
-		"firstname" : "Jeconduis",
-		"lastname" : "Mal",
+		"nom" : "Jeconduis",
+		"prenom" : "Mal",
 		"adresse" : {
 			"numero" : 93,
 			"nom" : "Rue quelconque",
@@ -81,8 +81,8 @@
 	},
 	{
 		"mail" : "jeconduismalaussi07",
-		"firstname" : "George",
-		"lastname" : "Moustakwa",
+		"nom" : "George",
+		"prenom" : "Moustakwa",
 		"adresse" : {
 			"numero" : 17,
 			"nom" : "Rue des rue de rue",
@@ -97,8 +97,8 @@
 	},
 	{
 		"mail":"tartine@gmail.com",
-		"firstname" : "Rochon",
-		"lastname" : "Marine",
+		"nom" : "Rochon",
+		"prenom" : "Marine",
 		"adresse" : {
 			"numero" : 0,
 			"nom" : "Avenue des champs ",
@@ -113,8 +113,8 @@
 	},
 	{
 		"mail":"bidochon34@yahoo.com",
-		"firstname" : "Rochon",
-		"lastname" : "Andre",
+		"nom" : "Rochon",
+		"prenom" : "Andre",
 		"adresse" : {
 			"numero" : 17,
 			"nom" : "Rue des rue de rue",
