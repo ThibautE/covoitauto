@@ -11,19 +11,25 @@ import 'rxjs/Rx';
 })
 export class TripsSearchComponent implements OnInit {
 
-	private trips : any[];
+	private tripsParams : any[];
+	private tripsFind : any[];
 	private subscribe : any;
 
 	constructor(private tripService : TripService, private route: ActivatedRoute) { }
 
 	ngOnInit() {
+		console.log('composant');
+
+		let date : string;
+		//date = this.tripsParams.date.getDate() + '-' + this.tripsParams.date.getMonth() + '-' + this.tripsParams.date.getFullYear();
+		console.log("date :" + this.tripsParams.date);
 		this.route.params.subscribe((params : Params) => {
-			let paramsUrl = params['cityD'] + '/' + params['cityA'] + '/' + params['date'];
-			this.tripService.getTripByParams(paramsUrl).subscribe(res => this.trips = res)
+			let paramsUrl = this.tripsParams.cityD + '/' + this.tripsParams.cityA + '/' + date;
+			this.tripService.getTripByParams(paramsUrl).subscribe(res => this.tripsFind = res)
 		});
 	}
 
 	empty(): boolean {
-	 	return (this.trips == undefined);
+	 	return (this.tripsFind == undefined);
 	}
 }

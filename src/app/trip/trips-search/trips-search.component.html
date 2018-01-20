@@ -1,13 +1,13 @@
 <form>
-  	<input class="bSearch" [(ngModel)]="cityD" type="text" name="cityD" placeholder="Départ">
-	<input class="bSearch" [(ngModel)]="cityA" type="text" name="cityA" placeholder="Destination">
-	<input class="bSearch" [(ngModel)]="date" type="date" name="date" placeholder="Date">
+  	<input class="bSearch" [(ngModel)]="tripsParams.cityD" type="text" name="cityD" placeholder="Départ">
+	<input class="bSearch" [(ngModel)]="tripsParams.cityA" type="text" name="cityA" placeholder="Destination">
+	<input class="bSearch" [(ngModel)]="tripsParams.date" type="date" name="date" placeholder="Date">
 	<input class="bValid" type="submit" value="Rechercher" [routerLink]="[{'outlets':{'trip': ['search/:cityD/:cityA/:date']}}]">
 </form>
 
 
 	<div *ngIf= "!empty()" >
-		<li *ngFor="let trip of (trips)"> 
+		<li *ngFor="let trip of (tripsFind)"> 
             <label *ngIf=" trip.date > today.getTime()"  > {{trip.depart.ville}} à {{trip.arrive.ville}} pour {{trip.prix}} €
 			<label *ngIf="trip.place != 0"> il reste {{trip.place}} !</label>
 			<label *ngIf="trip.place == 0" class="warning"> [Plus de place disponible !]</label></label>

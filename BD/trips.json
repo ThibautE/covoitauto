@@ -1,7 +1,7 @@
 [
 	{
 		"driver" : "xKiller34@yopmail.com",
-		"date" : "01/01/2018",
+		"date" : "01-01-2018",
 		"place" : 2,
 		"passagers" : ["jean.michel@gmail.com"],
 		"depart" : {
@@ -27,7 +27,7 @@
 	},
 	{
 		"driver" : "allezlesverts42@sainte.com",
-		"date" : "01/01/2018",
+		"date" : "01-01-2018",
 		"place" : 2,
 		"passagers" : ["clothilde.r@gmail.com"],
 		"depart" : {
@@ -54,7 +54,7 @@
 	},
 	{
 		"driver" : "jeconduismal06@gmail.com",
-		"date" : "01/01/2018",
+		"date" : "01-01-2018",
 		"place" : 4,
 		"passagers" : ["jeconduismalaussi07@gmail.com","tartine@gmail.com", "bidochon34@yahoo.com"],
 		"depart" : {

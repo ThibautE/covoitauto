@@ -10,7 +10,7 @@ export class TripService {
 
 	constructor(private http : HttpClient) { }
 
-	baseUrl = environment.apiUrl + ':' + environment.apiPort;
+	baseUrl = environment.apiUrl + ':' + environment.serverPort;
 	
 
 	create(model: any): Observable <any>{
@@ -32,8 +32,8 @@ export class TripService {
 	}
 
 	getTripByParams(searchParams): Observable <any> {
-		
-		let tripUrl: string = this.baseUrl + '/trip/search/' + searchParams.cityA + '/' + searchParams.cityD + '/' + searchParams.dateD;
+		console.log('service trip');
+		let tripUrl: string = this.baseUrl + '/trip/search/' + searchParams.cityA + '/' + searchParams.cityD + '/' + searchParams.date;
 		return this.http.get(tripUrl);
 	}
 }

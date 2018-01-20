@@ -9,7 +9,7 @@ app.use(express.json());
 
 let mongoClient = require("mongodb").MongoClient;
 let ObjectId = require("mongodb").ObjectId;
-let url = "mongodb://localhost:8888/covoitauto";
+let url = "mongodb://localhost:27017/covoitauto";
 
 
 
@@ -22,9 +22,9 @@ app.all("/*", function(req, res, next){
 });
 
 
-mongoClient.connect(url, function(err, db) {
+mongoClient.connect(url, function(err, database) {
 
-	const database = db.db('covoitauto');
+	const db = database.db('covoitauto');
 
     if (err){
       throw err;
@@ -82,12 +82,13 @@ mongoClient.connect(url, function(err, db) {
 	});
 
 	//chercher les trips d'après une ville départ, une ville arrivé et une date
-	app.get("/search/:cityD/:cityA/:date", function(req,res){
+	app.get("/trip/search/:cityD/:cityA/:date", function(req,res){
+				console.log('server');
 		db.collection("trips").find(
 			{
 				'depart.ville' : {$regex : new RegExp("^" + req.params.cityD.toLowerCase(), "i")},
 				'arrive.ville' : {$regex : new RegExp("^" + req.params.cityA.toLowerCase() + 'i')},
-				'date' : {$d : req.params.date}   
+				'date' : {$d : req.params.date }   
 			}).toArray(function(err, trips) {
 				if(err || trips == undefined){
 					var json = JSON.stringify([]);
