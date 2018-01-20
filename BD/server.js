@@ -9,7 +9,7 @@ app.use(express.json());
 
 let mongoClient = require("mongodb").MongoClient;
 let ObjectId = require("mongodb").ObjectId;
-let url = "mongodb://localhost:27017/covoitauto";
+let url = "mongodb://localhost:27016/covoitauto";
 
 
 
@@ -29,6 +29,7 @@ mongoClient.connect(url, function(err, database) {
     if (err){
       throw err;
     } else{
+		console.log(db);
         console.log("connected to " + url);
     }
 
@@ -67,7 +68,7 @@ mongoClient.connect(url, function(err, database) {
 	
 	// chercher tous les trips
 	app.get("/trip/all",function(req,res){
-		db.collection("trips").find().toArray(function(err, trip){
+		db.collection('trips').find().toArray(function(err, trip){
 			if(err || trips == undefined){
 				var json = JSON.stringify([]);
 				res.setHeader("Content-type","application/json; charset = UTF-8");
@@ -180,29 +181,6 @@ mongoClient.connect(url, function(err, database) {
 	app.delete("/user/:mail/",function(req,res){
     	database.collection("users").remove({'mail':req.params.mail});
   	});
-
-	app.get("/user/create/:mail/:nom/:prenom/:telephone/:age/:numero/:rue/:ville/:pays/:mdp",function(req,res){
-		    var myUser = {
-		      mail :req.params.mail,
-		      nom :req.params.nom,
-		      prenom :req.params.prenom,
-		      telephone : req.params.telephone,
-		      age : req.params.age,
-		      adresse: {
-		        numero : req.params.numero,
-		        nom : req.params.rue,
-		        ville : req.params.ville,
-		        pays : req.params.pays
-		      },
-		      password :req.params.mdp
-		    };
-		    res.setHeader("Content-type","text/plain; charset=UTF-8");
-		    db.collection("users").insertOne(myUser,function(err,doc){
-		    	if(err) throw err;
-		    	res.end(JSON.stringify(doc));
-		    });
-	});
-
 });
 
 app.listen(8888);
