@@ -9,17 +9,7 @@ app.use(express.json());
 
 let mongoClient = require("mongodb").MongoClient;
 let ObjectId = require("mongodb").ObjectId;
-let url = "mongodb://localhost:27017/covoitauto";
-
-
-
-app.all("/*", function(req, res, next){
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
-  console.log("Requete recue");
-  next();
-});
+let url = "mongodb://localhost:27016/covoitauto";
 
 
 mongoClient.connect(url, function(err, database) {
@@ -66,64 +56,43 @@ mongoClient.connect(url, function(err, database) {
 	});
 	
 	// chercher tous les trips
-	app.get("/trip/all",function(req,res){
-		db.collection("trips").find().toArray(function(err, trip){
-			if(err || trips == undefined){
-				var json = JSON.stringify([]);
-				res.setHeader("Content-type","application/json; charset = UTF-8");
-				res.end(json);	
-			}
-			else {
-				var json = JSON.stringify(trips);
-				res.setHeader("Content-type","application/json; charset = UTF-8");
-				res.end(json);
-			}
+	app.get("/trips",function(req,res){
+		getTrips(db,{"message" : "/trips"},function(step,results){
+			console.log("\n" + step + "avec" + results.length + "trajets selectionnés : ");
+			res.setHeader("Content-type","application/json; charset = UTF-8");
+			let json = JSON.stringify(results);
+			console.log(json);
+			res.end(json);
 		});
 	});
 
-	//chercher les trips d'après une ville départ, une ville arrivé et une date
-	app.get("/trip/search/:cityD/:cityA/:date", function(req,res){
-				console.log('server');
-		db.collection("trips").find(
-			{
-				'depart.ville' : {$regex : new RegExp("^" + req.params.cityD.toLowerCase(), "i")},
-				'arrive.ville' : {$regex : new RegExp("^" + req.params.cityA.toLowerCase() + 'i')},
-				'date' : {$d : req.params.date }   
-			}).toArray(function(err, trips) {
-				if(err || trips == undefined){
-					var json = JSON.stringify([]);
-					res.setHeader("Content-type","application/json; charset = UTF-8");
-					res.end(json);					
-				}
-				else{
-					var json = JSON.stringify(trips);
-					res.setHeader("Content-type","application/json; charset = UTF-8");
-					res.end(json);	
-				}
-			});
-		}
-	);
+	//chercher trip avec ville depart, arrivée et date
+	app.get("/trip/search/:cityD/:cityA/:date",function(req,res){
+		let filterObject = {'depart.ville' : null,'arrive.ville' : null, 'date' : null};
+		if(req.params.cityD != "*"){ filterObject['depart.ville'] = req.params.cityD;}
+		if(req.params.cityA != "*"){ filterObject['arrive.ville'] = req.params.cityA;}
+		if(req.params.date != "*"){ filterObject['date'] = req.params.date;}
+		getTripByParams(db,{"message" : "/trips","filterObject": filterObject},function(step,results){
+			res.setHeader("Content-type","application/json; charset = UTF-8");
+			let json = JSON.stringify(results);
+			console.log(json);
+			res.end(json);
+		});
+	});
 
-	// chercher les trips par ville Départ et ville D'arrivée
-	app.get("/search/:cityD/:cityA",function(req,res){
-		db.collection("trips").find(
-			{
-				'depart.ville' : {$regex : new RegExp("^" + req.params.cityD.toLowerCase(), "i")},
-				'arrive.ville' : {$regex : new RegExp("^" + req.params.cityA.toLowerCase() + 'i')},  
-			}).toArray(function(err, trips) {
-				if(err || trips == undefined){
-					var json = JSON.stringify([]);
-					res.setHeader("Content-type","application/json; charset = UTF-8");
-					res.end(json);					
-				}
-				else{
-					var json = JSON.stringify(trips);
-					res.setHeader("Content-type","application/json; charset = UTF-8");
-					res.end(json);	
-				}
-			});
-		}
-	);
+	// chercher les trips par ville départ et ville arrivée
+	app.get("/trip/search/:cityD/:cityA",function(req,res){
+		let filterObject = {'depart.ville' : null,'arrive.ville' : null};
+		if(req.params.cityD != "*"){filterObject['depart.ville'] = req.params.cityD;}
+		if(req.params.cityA != "*"){filterObject['arrive.ville'] = req.params.cityA;}
+
+		getTripByParams(db,{"message" : "/trips","filterObject": filterObject},function(step,results){
+			res.setHeader("Content-type","application/json; charset = UTF-8");
+			let json = JSON.stringify(results);
+			console.log(json);
+			res.end(json);
+		});
+	});
 
 	//Requêtes pour users 
 	app.get("/user/login/:mail/:password",function(req,res){
@@ -204,5 +173,27 @@ mongoClient.connect(url, function(err, database) {
 	});
 
 });
+
+function getTrips(db, param, callback){
+	db.collection("trips").find().toArray(function(err,documents){
+		if (err)
+			callback(err,[]);
+		else if (documents !== undefined) 
+			callback(param["message"],documents);
+		else
+			callback(param["message"],[]);
+	});
+}
+
+function getTripByParams(db,param,callback){
+	db.collection("trips").find(param["filterObject"]).toArray(function(err,documents){
+		if (err)
+			callback(err,[]);
+		else if (documents !== undefined) 
+			callback(param["message"],documents);
+		else
+			callback(param["message"],[]);
+	});
+}
 
 app.listen(8888);

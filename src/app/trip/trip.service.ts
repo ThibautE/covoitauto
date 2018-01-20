@@ -21,7 +21,7 @@ export class TripService {
 	}
 	
 	getAllTrips(): Observable <any>{
-		let tripUrl: string = this.baseUrl + '/trip/all';
+		let tripUrl: string = this.baseUrl + '/trips';
 		return this.http.get(tripUrl);
 	}
 

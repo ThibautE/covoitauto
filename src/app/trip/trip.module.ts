@@ -25,7 +25,8 @@ const routes: Routes = [
   {
     path: 'trips',
     component: TripsDisplayComponent,
-    canActivate: [AuthGuard]
+    outlet: 'trip'
+    //canActivate: [AuthGuard]
   },
   {
     path: 'trip/search/:cityD/:cityA/:date',
