@@ -10,6 +10,19 @@ app.use(express.json());
 let mongoClient = require("mongodb").MongoClient;
 let ObjectId = require("mongodb").ObjectId;
 let url = "mongodb://localhost:27016/covoitauto";
+<<<<<<< HEAD
+=======
+
+
+
+app.all("/*", function(req, res, next){
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+  console.log("Requete recue");
+  next();
+});
+>>>>>>> 82f9f349b3667d944af7bfa9b605c8ff0086331c
 
 
 mongoClient.connect(url, function(err, database) {
@@ -19,6 +32,7 @@ mongoClient.connect(url, function(err, database) {
     if (err){
       throw err;
     } else{
+		console.log(db);
         console.log("connected to " + url);
     }
 
@@ -56,6 +70,7 @@ mongoClient.connect(url, function(err, database) {
 	});
 	
 	// chercher tous les trips
+<<<<<<< HEAD
 	app.get("/trips",function(req,res){
 		getTrips(db,{"message" : "/trips"},function(step,results){
 			console.log("\n" + step + "avec" + results.length + "trajets selectionnés : ");
@@ -77,6 +92,20 @@ mongoClient.connect(url, function(err, database) {
 			let json = JSON.stringify(results);
 			console.log(json);
 			res.end(json);
+=======
+	app.get("/trip/all",function(req,res){
+		db.collection('trips').find().toArray(function(err, trip){
+			if(err || trips == undefined){
+				var json = JSON.stringify([]);
+				res.setHeader("Content-type","application/json; charset = UTF-8");
+				res.end(json);	
+			}
+			else {
+				var json = JSON.stringify(trips);
+				res.setHeader("Content-type","application/json; charset = UTF-8");
+				res.end(json);
+			}
+>>>>>>> 82f9f349b3667d944af7bfa9b605c8ff0086331c
 		});
 	});
 
@@ -149,29 +178,6 @@ mongoClient.connect(url, function(err, database) {
 	app.delete("/user/:mail/",function(req,res){
     	database.collection("users").remove({'mail':req.params.mail});
   	});
-
-	app.get("/user/create/:mail/:nom/:prenom/:telephone/:age/:numero/:rue/:ville/:pays/:mdp",function(req,res){
-		    var myUser = {
-		      mail :req.params.mail,
-		      nom :req.params.nom,
-		      prenom :req.params.prenom,
-		      telephone : req.params.telephone,
-		      age : req.params.age,
-		      adresse: {
-		        numero : req.params.numero,
-		        nom : req.params.rue,
-		        ville : req.params.ville,
-		        pays : req.params.pays
-		      },
-		      password :req.params.mdp
-		    };
-		    res.setHeader("Content-type","text/plain; charset=UTF-8");
-		    db.collection("users").insertOne(myUser,function(err,doc){
-		    	if(err) throw err;
-		    	res.end(JSON.stringify(doc));
-		    });
-	});
-
 });
 
 function getTrips(db, param, callback){
