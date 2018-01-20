@@ -10,8 +10,6 @@ app.use(express.json());
 let mongoClient = require("mongodb").MongoClient;
 let ObjectId = require("mongodb").ObjectId;
 let url = "mongodb://localhost:27016/covoitauto";
-<<<<<<< HEAD
-=======
 
 
 
@@ -22,7 +20,6 @@ app.all("/*", function(req, res, next){
   console.log("Requete recue");
   next();
 });
->>>>>>> 82f9f349b3667d944af7bfa9b605c8ff0086331c
 
 
 mongoClient.connect(url, function(err, database) {
@@ -70,7 +67,6 @@ mongoClient.connect(url, function(err, database) {
 	});
 	
 	// chercher tous les trips
-<<<<<<< HEAD
 	app.get("/trips",function(req,res){
 		getTrips(db,{"message" : "/trips"},function(step,results){
 			console.log("\n" + step + "avec" + results.length + "trajets selectionnés : ");
@@ -92,20 +88,6 @@ mongoClient.connect(url, function(err, database) {
 			let json = JSON.stringify(results);
 			console.log(json);
 			res.end(json);
-=======
-	app.get("/trip/all",function(req,res){
-		db.collection('trips').find().toArray(function(err, trip){
-			if(err || trips == undefined){
-				var json = JSON.stringify([]);
-				res.setHeader("Content-type","application/json; charset = UTF-8");
-				res.end(json);	
-			}
-			else {
-				var json = JSON.stringify(trips);
-				res.setHeader("Content-type","application/json; charset = UTF-8");
-				res.end(json);
-			}
->>>>>>> 82f9f349b3667d944af7bfa9b605c8ff0086331c
 		});
 	});
 
