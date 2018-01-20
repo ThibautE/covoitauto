@@ -11,7 +11,7 @@ export class UserService {
     baseUrl = environment.apiUrl + ':' + environment.apiPort;
 
     create(model: any): Observable <any> {
-        const url: string = this.baseUrl + '/user';
+        const url: string = this.baseUrl + '/user/create';
         const headers = new HttpHeaders({'Content-Type': 'application/json'});
         return this.http.post(url, model, {headers});
     }
