@@ -59,6 +59,7 @@ mongoClient.connect(url, function(err, database) {
 			res.setHeader("Content-type","application/json; charset = UTF-8");
 			let json = JSON.stringify(results);
 			console.log(json);
+			res.send(step);
 			res.end(json);
 		});
 	});
@@ -137,6 +138,7 @@ mongoClient.connect(url, function(err, database) {
 			res.setHeader("Content-type","application/json; charset = UTF-8");
 			let json = JSON.stringify(results);
 			console.log(json);
+			res.send(step);
 			res.end(json);
 	  });
 	});
@@ -181,11 +183,11 @@ function createTrip(db, param, callback){
 	db.collection("trips").insertOne(param["filterObject"], function(err, doc) {
 		if(err) {
 			console.log(param);	
-			callback('echec');
+			callback('echec', []);
 		}
 		else {
 			console.log(param);
-			callback('succes');
+			callback('succes', doc);
 		}
 	});
 }
@@ -206,11 +208,11 @@ function deleteTrip(db, param, callback){
 function createUser(db, param, callback){
 	db.collection("users").insertOne(param["filterObject"] ,function(err, doc) {
 		if(err){ 
-			callback('echec');
+			callback('echec', []);
 			console.log(doc);
 		}
 		else {
-			callback('succes');
+			callback('succes', doc);
 			console.log(doc);
 		}
 	});
