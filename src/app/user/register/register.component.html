@@ -1,5 +1,5 @@
 
-<div *ngIf = "reponse = false">
+<div *ngIf ="reponse == false">
   <h2>Inscription</h2>
     <form name="proposeForm" (ngSubmit)="proposeForm.form.valid && onSubmit()" #proposeForm="ngForm">
         <input class="bCreate" [(ngModel)]="newUser.firstname" type="text" name="prenom" placeholder="ex: Alain">
@@ -17,7 +17,7 @@
     </div>
   </div>
 
-  <div *ngIf = "reponse = true">
+  <div *ngIf = "reponse == true">
     {{message}}
   </div>
 

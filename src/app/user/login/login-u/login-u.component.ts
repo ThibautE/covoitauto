@@ -12,6 +12,8 @@ import { Message, MessagesModule } from 'primeng/primeng';
 
 export class LoginUComponent implements OnInit {
     
+  mail : string;
+  password : string;
   returnUrl: string; 
   msgs: Message[] =  [];
 
