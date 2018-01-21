@@ -97,16 +97,25 @@ mongoClient.connect(url, function(err, database) {
 		getTripByParams(db,{"message" : "/trips","filterObject": filterObject},function(step,results){
 			res.setHeader("Content-type","application/json; charset = UTF-8");
 			let json = JSON.stringify(results);
-			console.log(json);
 			res.end(json);
 		});
 	});
 
 	// 		-- Users -- 
 
+	//Afficher tous les utilisateurs 
+	app.get("/users",function(req,res){
+		getUsers(db,{"message" : "/users"},function(step,results){
+			res.setHeader("Content-type","application/json; charset = UTF-8");
+			let json = JSON.stringify(results);
+			res.end(json);
+		});
+	});
+
+	//Connexion
 	app.get("/user/login/:mail/:password",function(req,res){
 
-		let user = {'mail' : req.params.email, 'password' : req.params.password};
+		let user = {'mail' : req.params.mail, 'password' : req.params.password};
 
 		getUserByParams(db,{"message" : "/users", "filterObject" : user}, function(step, results){
 			res.setHeader("Content-type","application/json; charset = UTF-8");
@@ -201,7 +210,18 @@ function deleteTrip(db, param, callback){
 	});
 }
 
-	// -- Users -- 
+	// -- Users --
+function getUsers(db, param, callback){
+	db.collection("users").find().toArray(function(err,doc){
+		if (err)
+			callback(err,[]);
+		else if (doc !== undefined) 
+			callback(param["message"],doc);
+		else
+			callback(param["message"],[]);
+	});
+}
+
 
 function createUser(db, param, callback){
 	db.collection("users").insertOne(param["filterObject"] ,function(err, doc) {

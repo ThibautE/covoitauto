@@ -1,14 +1,8 @@
-  <form name="form" (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate>
-	<div [ngClass]="{ 'has-error': f.submitted && !mail.valid }">
-    	<label for="mail">Email</label>
-		<input type="text" class ="form-control" id="mail"  required placeholder="email" [(ngModel)]="model.mail" name = "mail"/><p></p>
-    	<div *ngIf="f.submitted && !mail.valid" class="err">Veuillez saisir un email valide</div>
-	</div>
-	<div [ngClass]="{ 'has-error': f.submitted && !mail.valid }">
-    	<label for="password">Mot de passe</label>
-		<input type="text" class ="form-control" id="password"  required placeholder="mot de passe" [(ngModel)]="model.password" name = "password"/><p></p>
-    	<div *ngIf="f.submitted && !password.valid" class="err">Veuillez saisir un mot de passe valide</div>
-	</div>
+  <form (ngSubmit)="login()">
+    <label for="mail">Email</label>
+	<input type="text" id="mail" required placeholder="email" [(ngModel)]="mail" name = "mail"/><p></p>
+    <label for="password">Mot de passe</label>
+	<input type="text" id="password" required placeholder="mot de passe" [(ngModel)]="password" name = "password"/><p></p>
 	<button>Se connecter</button>
 </form>
 <div *ngIf="isLoggedIn">

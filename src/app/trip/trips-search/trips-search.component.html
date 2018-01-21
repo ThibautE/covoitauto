@@ -1,8 +1,8 @@
 <form>
-  	<input class="bSearch" [(ngModel)]="tripsParams.cityD" type="text" name="cityD" placeholder="Départ">
-	<input class="bSearch" [(ngModel)]="tripsParams.cityA" type="text" name="cityA" placeholder="Destination">
-	<input class="bSearch" [(ngModel)]="tripsParams.date" type="date" name="date" placeholder="Date">
-	<input class="bValid" type="submit" value="Rechercher" [routerLink]="[{'outlets':{'trip': ['search/:cityD/:cityA/:date']}}]">
+  	<input class="bSearch" [(ngModel)]="cityD" type="text" name="cityD" placeholder="Départ">
+	<input class="bSearch" [(ngModel)]="cityA" type="text" name="cityA" placeholder="Destination">
+	<input class="bSearch" [(ngModel)]="date" type="date" name="date" placeholder="Date">
+	<input class="bValid" type="submit" value="Rechercher" [routerLink]="[{'outlets':{'trip': ['trip/search/:cityD/:cityA/:date']}}]">
 </form>
 
 

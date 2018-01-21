@@ -12,12 +12,6 @@ import { Message, MessagesModule } from 'primeng/primeng';
 
 export class LoginUComponent implements OnInit {
     
-  model: any = {};
-  mail : string;
-  password: string;
-
-
-  loading = false;
   returnUrl: string; 
   msgs: Message[] =  [];
 
@@ -29,16 +23,14 @@ export class LoginUComponent implements OnInit {
     if (this.route.snapshot.queryParams['origin'] &&
       this.route.snapshot.queryParams['origin'] === 'register') {
       this.msgs.push({severity: 'success', summary: 'Compte créé', detail: 'Vous pouvez maintenant vous connecter'});
-      this.model.mail = this.route.snapshot.queryParams['mail'] || '';
+      this.mail = this.route.snapshot.queryParams['mail'] || '';
     }
 
   }
 
   login() {
-    this.loading = true;
     this.loginService.login(this.mail, this.password)
       .subscribe(res => {
-        this.loading = false;
         if (res[0]) {
           if (this.returnUrl === '/') {
             this.returnUrl = '/profile';
