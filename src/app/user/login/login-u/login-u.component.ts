@@ -25,7 +25,6 @@ export class LoginUComponent implements OnInit {
       this.msgs.push({severity: 'success', summary: 'Compte créé', detail: 'Vous pouvez maintenant vous connecter'});
       this.mail = this.route.snapshot.queryParams['mail'] || '';
     }
-
   }
 
   login() {
