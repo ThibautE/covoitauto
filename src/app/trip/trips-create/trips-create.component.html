@@ -11,8 +11,8 @@
 	<input class="bValid" type="submit" value="Créer ce trajet">
 </form>
 
-<div *ngIf="villeD && adresseD && villeA && adresseA && dateT && nbPlace && voiture && prix " >
-		<h3>Le trajet suivant va être créer :</h3> <br>Ville départ : {{villeD}} à l'adresse : {{adresseD}} <br>Ville arrivée : {{villeA}}, à l'adresse {{villeA}} <br>Date du trajet : {{dateT}}, <br> Information sur la voiture : {{voiture}} <br>Nombre de places disponible : {{nbPlace}} <br> Prix : {{prix}}€
+<div *ngIf="newTrip.cityD && newTrip.addressD && newTrip.cityA && newTrip.addressA && newTrip.date && newTrip.places && newTrip.car && newTrip.price" >
+		<h3>Le trajet suivant va être créer :</h3> <br>Ville départ : {{newTrip.cityD}} à l'adresse : {{newTrip.addressD}} <br>Ville arrivée : {{newTrip.cityA}}, à l'adresse {{newTrip.addressA}} <br>Date du trajet : {{newTrip.date}}, <br> Information sur la voiture : {{newTrip.car}} <br>Nombre de places disponible : {{newTrip.places}} <br> Prix : {{newTrip.price}}€
 		
 </div>
 
