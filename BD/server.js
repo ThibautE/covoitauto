@@ -1,9 +1,11 @@
 let express = require ("express");
 let cors = require ("cors");
 let assert = require('assert');
+let bodyParser = require('body-parser');
 
 
 let app = express();
+app.use(bodyParser.json());
 app.use(cors());
 app.use(express.json());
 
@@ -21,7 +23,7 @@ app.all("/*", function(req, res, next){
   next();
 });
 
-
+// connexion à la base
 mongoClient.connect(url, function(err, database) {
 
 	const db = database.db('covoitauto');
@@ -33,16 +35,18 @@ mongoClient.connect(url, function(err, database) {
         console.log("connected to " + url);
     }
 
-	// ---- Requête pour les trips ----
+	// fonctions express (node)
+
+	// -- Trips --
 
 	// creation de trips
-	app.post('/create', function (req, res) {
+	app.post("/trip/create", function (req, res) {
 		
 			if(!req.body){
 			  return res.sendStatus(400);
 			}
-
-			var newTrip = {
+			console.log(req.body);
+			let newTrip = {
 			  "depart" : {"ville" : req.body.cityD, "adresse" : req.body.addressD},
 			  "arrivee" : {"ville" : req.body.cityA, "adresse" : req.body.addressA},
 			  "date" : req.body.date,
@@ -51,18 +55,11 @@ mongoClient.connect(url, function(err, database) {
 			  "conducteur" : req.body.conducteur,
 			  "passagers" : []
 		};
-
-		db.collection("trips").insertOne(newTrip, function(err, trips) {
-			if(err || trips == undefined) {
-				var json = JSON.stringify([]);
-				res.setHeader("Content-type","application/json; charset = UTF-8");
-				res.end(json);	
-			}
-			else{
-				var json = JSON.stringify(trips);
-				res.setHeader("Content-type","application/json; charset = UTF-8");
-				res.end(json);
-			}
+		createTrip(db, {"message" : "/trips", "filterObject" : newTrip}, function(step,results){
+			res.setHeader("Content-type","application/json; charset = UTF-8");
+			let json = JSON.stringify(results);
+			console.log(json);
+			res.end(json);
 		});
 	});
 	
@@ -105,34 +102,28 @@ mongoClient.connect(url, function(err, database) {
 		});
 	});
 
-	//Requêtes pour users 
+	// 		-- Users -- 
+
 	app.get("/user/login/:mail/:password",function(req,res){
-		var user = database.collection('users').find({'mail':req.params.mail, 'password':req.params.password});
-    	
-    	user.toArray(function(err,documents){
 
-      		if(documents && documents[0] && documents[0].password){
-        		delete documents[0].password; 
-      		}
+		let user = {'mail' : req.params.email, 'password' : req.params.password};
 
-      		console.log(documents);
-      		var json=JSON.stringify(documents);
-	  		res.setHeader("Access-Control-Allow-Origin", "*");
-	  		res.setHeader("Content-type","application/json");
-	 		res.end(json);
-
-    	});
+		getUserByParams(db,{"message" : "/users", "filterObject" : user}, function(step, results){
+			res.setHeader("Content-type","application/json; charset = UTF-8");
+			let json = JSON.stringify(results);
+			console.log(json);
+			res.end(json);
+		});
 	});
 
-
 	// inscriptions user 
-	app.get("/user/create", function(req, res) {
+	app.post("/user/create", function(req, res) {
 		
 		if(!req.body){
 			return res.sendStatus(400);
 		  }
 
-		  var newUser = {
+		  let newUser = {
 			"prenom" : req.body.firstname,
 			"nom" : req.body.lastname,
 			"mail" : req.body.email,
@@ -142,43 +133,107 @@ mongoClient.connect(url, function(err, database) {
 			"telephone" : req.body.phone
 	  };
 
-	  db.collection("users").insertOne(newUser, function(err, user) {
-		  if(err || user == undefined) {
-			  var json = JSON.stringify([]);
-			  res.setHeader("Content-type","application/json; charset = UTF-8");
-			  res.end(json);	
-		  }
-		  else{
-			  var json = JSON.stringify(user);
-			  res.setHeader("Content-type","application/json; charset = UTF-8");
-			  res.end(json);
-		  }
+	  createUser(db, {"message" : "/users", "filterObject" : newUser}, function(step, results){
+			res.setHeader("Content-type","application/json; charset = UTF-8");
+			let json = JSON.stringify(results);
+			console.log(json);
+			res.end(json);
 	  });
-	})
+	});
 
 	//delete user
 	app.delete("/user/:mail/",function(req,res){
-    	database.collection("users").remove({'mail':req.params.mail});
+		deleteUser(db,{"message" : "/users", "filterObject" : req.body.mail}, function(step, results){
+			res.setHeader("Content-type","application/json; charset = UTF-8");
+			let json = JSON.stringify(results);
+			console.log(json);
+			res.end(json);
+		});
   	});
 });
 
+//  		----- requêtes mongo -----
+
+	// -- Trips --
 function getTrips(db, param, callback){
-	db.collection("trips").find().toArray(function(err,documents){
+	db.collection("trips").find().toArray(function(err,doc){
 		if (err)
 			callback(err,[]);
-		else if (documents !== undefined) 
-			callback(param["message"],documents);
+		else if (doc !== undefined) 
+			callback(param["message"],doc);
 		else
 			callback(param["message"],[]);
 	});
 }
 
 function getTripByParams(db,param,callback){
-	db.collection("trips").find(param["filterObject"]).toArray(function(err,documents){
+	db.collection("trips").find(param["filterObject"]).toArray(function(err,doc){
 		if (err)
 			callback(err,[]);
-		else if (documents !== undefined) 
-			callback(param["message"],documents);
+		else if (doc !== undefined) 
+			callback(param["message"],doc);
+		else
+			callback(param["message"],[]);
+	});
+}
+
+function createTrip(db, param, callback){
+	db.collection("trips").insertOne(param["filterObject"], function(err, doc) {
+		if(err) {
+			console.log(param);	
+			callback('echec');
+		}
+		else {
+			console.log(param);
+			callback('succes');
+		}
+	});
+}
+
+function deleteTrip(db, param, callback){
+	db.collection("trips").remove(param["filterObject"]).toArray(function(err, doc){
+		if(err)
+			callback(err, []);	
+		else if (doc !== undefined)
+			callback(param["message"], doc);
+		else
+			callback(param["message"], []);
+	});
+}
+
+	// -- Users -- 
+
+function createUser(db, param, callback){
+	db.collection("users").insertOne(param["filterObject"] ,function(err, doc) {
+		if(err){ 
+			callback('echec');
+			console.log(doc);
+		}
+		else {
+			callback('succes');
+			console.log(doc);
+		}
+	});
+}
+
+
+function deleteUser(db, param, callback){
+	db.collection("users").remove(param["filterObject"]).toArray(function(err, doc){
+		if(err)
+			callback(err, []);	
+		else if (document !== undefined)
+			callback(param["message"], doc);
+		else
+			callback(param["message"], []);
+	});
+}
+
+function getUserByParams(db,param,callback){
+	db.collection("users").find(param["filterObject"]).toArray(function(err,doc){
+		if (err)
+			callback(err,[]);
+		else if (doc !== undefined) 
+			callback(param["message"],doc);
 		else
 			callback(param["message"],[]);
 	});
