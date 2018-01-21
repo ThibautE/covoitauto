@@ -33,8 +33,8 @@ export class TripsCreateComponent implements OnInit {
 
 	ngOnInit() {
 
-		this.newTrip.date = new Date();
-		this.newTrip.date.today();
+		
+
 		this.newTrip.places = 3;
 
 		this.message = "";

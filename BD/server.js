@@ -23,6 +23,14 @@ app.all("/*", function(req, res, next){
   next();
 });
 
+// ----- utilitaire -----
+function formatDate(date) {
+	let dd = date.getDay();
+	let mm = date.getMonth();
+	let yyyy = date.getFullYear();
+	date = dd + "-" + mm + "-" + yyyy;
+}
+
 // connexion à la base
 mongoClient.connect(url, function(err, database) {
 
@@ -49,7 +57,7 @@ mongoClient.connect(url, function(err, database) {
 			let newTrip = {
 			  "depart" : {"ville" : req.body.cityD, "adresse" : req.body.addressD},
 			  "arrivee" : {"ville" : req.body.cityA, "adresse" : req.body.addressA},
-			  "date" : req.body.date,
+			  "date" : formatDate(req.body.date),
 			  "prix" : parseFloat(req.body.price),
 			  "nbPlaces" : req.body.places,
 			  "conducteur" : req.body.conducteur,
@@ -80,7 +88,7 @@ mongoClient.connect(url, function(err, database) {
 		let filterObject = {'depart.ville' : null,'arrive.ville' : null, 'date' : null};
 		if(req.params.cityD != "*"){ filterObject['depart.ville'] = req.params.cityD;}
 		if(req.params.cityA != "*"){ filterObject['arrive.ville'] = req.params.cityA;}
-		if(req.params.date != "*"){ filterObject['date'] = req.params.date;}
+		if(req.params.date != "*"){ filterObject['date'] = formatDate(req.params.date);}
 		getTripByParams(db,{"message" : "/trips","filterObject": filterObject},function(step,results){
 			res.setHeader("Content-type","application/json; charset = UTF-8");
 			let json = JSON.stringify(results);
