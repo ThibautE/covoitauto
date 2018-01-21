@@ -16,6 +16,7 @@ export class TripsDisplayComponent implements OnInit {
   constructor(private tripService: TripService, private route : ActivatedRoute ) { }
 
   ngOnInit() {
+    let date = new Date();
     this.route.params.subscribe((params : Params)  => {
       this.tripService.getAllTrips().subscribe((res => this.trips = res));
     });

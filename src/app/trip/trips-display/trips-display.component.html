@@ -7,8 +7,8 @@
     <td>
       <ul>
         <li *ngFor="let trip of (trips);  let i = index"> 
-            <label *ngIf=" trip.dateD > today.getTime()"  > {{trip.depart.ville}} à {{trip.arrive.ville}} pour {{trip.prix}} €
-            <label *ngIf="trip.place == 0" class="warning"> (not available)</label></label>
+            <label *ngIf=" trip.date > date"  > {{trip.depart.ville}} à {{trip.arrive.ville}} pour {{trip.prix}} €
+            <label *ngIf="trip.nbPlaces == 0" class="warning"> (not available)</label></label>
         </li>
         
       </ul>

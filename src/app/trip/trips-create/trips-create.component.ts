@@ -24,7 +24,7 @@ export class TripsCreateComponent implements OnInit {
 	cpt : number = 0;
 	*/
 
-	newTrip : any = [];
+	newTrip : any = {};
 	reponse : any;
 	message : string;
 
@@ -33,17 +33,18 @@ export class TripsCreateComponent implements OnInit {
 
 	ngOnInit() {
 
-		
-
+		this.newTrip = {};
 		this.newTrip.places = 3;
-
 		this.message = "";
-
 	}
 
 	onSubmit() {
 
-		if(this.newTrip.date == undefined || this.newTrip.places == 0 || this.newTrip.places == undefined || this.newTrip.date < this.newTrip.date.today() ||
+		// let options = {'day' : 'numeric', 'month' : 'numeric', 'year' : 'numeric'};
+		// this.newTrip.date = this.newTrip.date.toLocaleDateString('fr-FR', options);
+		let date = new Date();
+		
+		if(this.newTrip.date == undefined || this.newTrip.places == 0 || this.newTrip.places == undefined || this.newTrip.date < date ||
 		   this.newTrip.cityD == undefined || this.newTrip.cityA == undefined || this.newTrip.price == undefined){
 			this.message = "Un problème à eu lieu, veuillez remplir tous les champs obligatoires.";
 		}
@@ -56,4 +57,5 @@ export class TripsCreateComponent implements OnInit {
 		}		
 	}
 
+	
 }

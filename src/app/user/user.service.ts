@@ -8,7 +8,7 @@ export class UserService {
     
     constructor(private http: HttpClient) { }
 
-    baseUrl = environment.apiUrl + ':' + environment.apiPort;
+    baseUrl = environment.apiUrl + ':' + environment.serverPort;
 
     create(model: any): Observable <any> {
         const url: string = this.baseUrl + '/user/create';

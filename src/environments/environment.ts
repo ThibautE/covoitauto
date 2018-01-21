@@ -7,5 +7,6 @@ export const environment = {
   production: false,
   apiUrl: 'http://localhost',
   apiPort: '4200',
-  serverPort: '27017'
+  serverPort: '8888',
+  mongoPort: '27016'
 };
