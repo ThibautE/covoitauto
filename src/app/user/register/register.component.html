@@ -1,4 +1,5 @@
-<div>
+
+<div *ngIf = "reponse = false">
   <h2>Inscription</h2>
     <form name="proposeForm" (ngSubmit)="proposeForm.form.valid && onSubmit()" #proposeForm="ngForm">
         <input class="bCreate" [(ngModel)]="newUser.firstname" type="text" name="prenom" placeholder="ex: Alain">
@@ -10,8 +11,13 @@
       <input class="bCreate" [(ngModel)]="newUser.phone" type="text" name="telephone" placeholder="ex: 0625487984">
       <input class="bValid" type="submit" value="Valider inscription">
     </form> 
-</div>
+    
+    <div>
+      <p> {{message}} </p>
+    </div>
+  </div>
 
-<div>
-	<p> {{message}} </p>
-</div>
+  <div *ngIf = "reponse = true">
+    {{message}}
+  </div>
+
