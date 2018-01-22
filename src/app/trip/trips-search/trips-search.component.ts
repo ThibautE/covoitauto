@@ -3,7 +3,6 @@ import { TripService } from '../trip.service';
 import { Params, ActivatedRoute } from '@angular/router';
 import 'rxjs/Rx';
 
-
 @Component({
   selector: 'app-trips-search',
   templateUrl: './trips-search.component.html',
@@ -12,15 +11,15 @@ import 'rxjs/Rx';
 export class TripsSearchComponent implements OnInit {
 
 
-	private tripsParams : any = {};
-	private tripsFind : any = {};
+	private tripsParams : any = [];
+	private tripsFind : any = [];
 	private subscribe : any;
 
 	constructor(private tripService : TripService, private route: ActivatedRoute) { }
 
 	ngOnInit() {
-		this.tripsParams = {};
-		this.tripsFind = {};
+		this.tripsParams = [];
+		this.tripsFind = [];
 	}
 
 	onSubmit(){

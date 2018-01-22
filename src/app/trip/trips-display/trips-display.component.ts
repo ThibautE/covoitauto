@@ -10,7 +10,7 @@ import {Params, ActivatedRoute} from '@angular/router'
 
 export class TripsDisplayComponent implements OnInit {
 
-  private trips : any[];
+  protected trips : any = [];
   private subscribe : any;
 
   constructor(private tripService: TripService, private route : ActivatedRoute ) { }
@@ -19,6 +19,7 @@ export class TripsDisplayComponent implements OnInit {
     let date = new Date();
     this.route.params.subscribe((params : Params)  => {
       this.tripService.getAllTrips().subscribe((res => this.trips = res));
+      console.log(this.trips);
     });
   }
 }

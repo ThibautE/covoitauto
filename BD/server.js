@@ -49,7 +49,7 @@ mongoClient.connect(url, function(err, database) {
 			console.log(req.body);
 			let newTrip = {
 			  "depart" : {"ville" : req.body.cityD, "adresse" : req.body.addressD},
-			  "arrivee" : {"ville" : req.body.cityA, "adresse" : req.body.addressA},
+			  "arrive" : {"ville" : req.body.cityA, "adresse" : req.body.addressA},
 			  "date" : req.body.date,
 			  "prix" : parseFloat(req.body.price),
 			  "nbPlaces" : req.body.places,
@@ -86,6 +86,14 @@ mongoClient.connect(url, function(err, database) {
 			res.setHeader("Content-type","application/json; charset = UTF-8");
 			let json = JSON.stringify(results);
 			console.log(json);
+			res.end(json);
+		});
+	});
+
+	app.get("/trip/deleteAll",function(req,res){
+		deleteTrip(db,{"message" : "/trip/deleteAll"},function(step,results){
+			res.setHeader("Content-type","application/json; charset = UTF-8");
+			let json = JSON.stringify(results);
 			res.end(json);
 		});
 	});
@@ -203,7 +211,7 @@ function createTrip(db, param, callback){
 }
 
 function deleteTrip(db, param, callback){
-	db.collection("trips").remove(param["filterObject"]).toArray(function(err, doc){
+	db.collection("trips").remove().toArray(function(err, doc){
 		if(err)
 			callback(err, []);	
 		else if (doc !== undefined)

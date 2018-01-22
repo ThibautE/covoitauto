@@ -7,10 +7,10 @@
 
 
 	<div *ngIf= "!empty()" >
-		<li *ngFor="let trip of (tripsFind)"> 
-            <label *ngIf=" trip.date > today.getTime()"  > {{trip.depart.ville}} à {{trip.arrive.ville}} pour {{trip.prix}} €
+		<li *ngFor="let trip of tripsFind"> 
+            <label *ngIf=" trip.date > today.getTime()"  > {{trip.depart.ville}} à {{trip.arrive.ville}} pour {{trip.prix}} €</label>
 			<label *ngIf="trip.place != 0"> il reste {{trip.place}} !</label>
-			<label *ngIf="trip.place == 0" class="warning"> [Plus de place disponible !]</label></label>
+			<label *ngIf="trip.place == 0" class="warning"> [Plus de place disponible !]</label>
         </li>
 	</div> 
 	<div *ngIf= "empty()">

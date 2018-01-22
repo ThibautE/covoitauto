@@ -1,0 +1,22 @@
+ul{
+	margin-left: 10%;
+}
+
+li{
+	list-style-type: none;
+	background-color: #e6e6e6;
+	margin : 1%;
+	width: 80%;
+	padding: 1%;
+}
+
+.res{
+	float: right;
+}
+
+a{
+	background-color: #4caf50;
+    text-decoration: none;
+    color: #fff;
+    padding: 1px 15px;	
+}

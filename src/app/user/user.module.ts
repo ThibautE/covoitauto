@@ -22,9 +22,9 @@ const routes: Routes = [
     component: RegisterComponent,
   },
   {
-    path: 'admin',
+    path: 'users',
     component: AdminPanelComponent,
-    canActivate: [AdminGuard]
+    //canActivate: [AdminGuard]
   },
   {
     path: 'profile',

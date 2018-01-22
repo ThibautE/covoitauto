@@ -8,7 +8,7 @@ export class UserService {
     
     constructor(private http: HttpClient) { }
 
-    baseUrl = environment.apiUrl + ':' + environment.serverPort;
+    baseUrl = environment.apiUrl + ':' + environment.apiPort;
 
     create(model: any): Observable <any> {
         const url: string = this.baseUrl + '/user/create';
@@ -18,6 +18,11 @@ export class UserService {
 
     getByID(id: string): Observable <any> {
         return this.http.get(this.baseUrl + '/user/id/' + id);
+    }
+
+    getAllUsers(): Observable <any>{
+        let userUrl: string = this.baseUrl + '/users';
+        return this.http.get(userUrl);
     }
 
     update(model: Object): Observable<any> {
