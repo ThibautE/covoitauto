@@ -68,7 +68,6 @@ mongoClient.connect(url, function(err, database) {
 	// chercher tous les trips
 	app.get("/trips",function(req,res){
 		getTrips(db,{"message" : "/trips"},function(step,results){
-			console.log("\n" + step + "avec" + results.length + "trajets selectionnés : ");
 			res.setHeader("Content-type","application/json; charset = UTF-8");
 			let json = JSON.stringify(results);
 			console.log("\n" + json);

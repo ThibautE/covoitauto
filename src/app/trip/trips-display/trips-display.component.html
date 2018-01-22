@@ -1,17 +1,22 @@
-<p>
-  Covoiturages disponibles :
-</p>
 
-<table>
-  <tr>
-    <td>
-      <ul>
-        <li *ngFor="let trip of (trips);  let i = index"> 
-            <label *ngIf=" trip.date > date"  > {{trip.depart.ville}} à {{trip.arrive.ville}} pour {{trip.prix}} €
-            <label *ngIf="trip.nbPlaces == 0" class="warning"> (not available)</label></label>
-        </li>
-        
-      </ul>
-    </td>
-  </tr>
-</table>
+    <p>
+        Covoiturages disponibles :
+      </p>
+      
+      <table>
+        <tr>
+          <td>
+            <ul>
+              <li *ngFor="let trip of trips"> 
+                <div>
+                  {{trip.depart.ville}} à {{trip.arrive.ville}} pour {{trip.prix}} €
+                  <div *ngIf="trip.nbPlaces == 0" class="warning"> 
+                    (not available)
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </td>
+        </tr>
+      </table>      
+
