@@ -21,5 +21,6 @@ export class TripsDisplayComponent implements OnInit {
       this.tripService.getAllTrips().subscribe((res => this.trips = res));
       console.log(this.trips);
     });
+    console.log(this.trips);
   }
 }

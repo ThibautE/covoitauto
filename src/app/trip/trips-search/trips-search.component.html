@@ -1,16 +1,22 @@
-<form>
-  	<input class="bSearch" [(ngModel)]="cityD" type="text" name="cityD" placeholder="Départ">
-	<input class="bSearch" [(ngModel)]="cityA" type="text" name="cityA" placeholder="Destination">
-	<input class="bSearch" [(ngModel)]="date" type="date" name="date" placeholder="Date">
-	<input class="bValid" type="submit" value="Rechercher" [routerLink]="[{'outlets':{'trip': ['trip/search/:cityD/:cityA/:date']}}]">
+<form name="proposeForm" (ngSubmit)="proposeForm.form.valid && onSubmit()" #proposeForm="ngForm">
+  	<input class="bSearch" [(ngModel)]="tripsParams.cityD" type="text" name="cityD" placeholder="Départ">
+	<input class="bSearch" [(ngModel)]="tripsParams.cityA" type="text" name="cityA" placeholder="Destination">
+	<input class="bSearch" [(ngModel)]="tripsParams.date" type="date" name="date" placeholder="Date">
+	<input class="bValid" type="submit" value="Rechercher">
 </form>
 
 
 	<div *ngIf= "!empty()" >
 		<li *ngFor="let trip of tripsFind"> 
+<<<<<<< HEAD
             <label *ngIf=" trip.date > today.getTime()"  > {{trip.depart.ville}} à {{trip.arrive.ville}} pour {{trip.prix}} €</label>
 			<label *ngIf="trip.place != 0"> il reste {{trip.place}} !</label>
 			<label *ngIf="trip.place == 0" class="warning"> [Plus de place disponible !]</label>
+=======
+            <label > {{trip.depart.ville}} à {{trip.arrive.ville}} pour {{trip.prix}} €
+			<label *ngIf="trip.nbPlaces != 0"> il reste {{trip.nbPlaces}} !</label>
+			<label *ngIf="trip.nbPlaces == 0" class="warning"> [Plus de place disponible !]</label></label>
+>>>>>>> 9e9d48ea2d38601151fafeea25cc585324f6f610
         </li>
 	</div> 
 	<div *ngIf= "empty()">

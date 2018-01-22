@@ -1,11 +1,8 @@
-<p>
-  Covoiturages disponibles :
-</p>
-
   <ul>
     <li *ngFor="let trip of (trips)"> 
       <label>Trajet de {{trip.depart.ville}} à {{trip.arrive.ville}} : {{trip.prix}} €  <a href="" class="res">Réserver</a> </label>
       <label *ngIf="trip.nbPlaces == 0" class="warning"> (not available)</label>
     </li>
   </ul>
+
 
