@@ -31,9 +31,11 @@ export class TripService {
 		return this.http.get(tripUrl);
 	}
 
-	getTripByParams(searchParams): Observable <any> {
+	getTripByParams(cityD : string, cityA : string, date: string): Observable <any> {
+		console.log("city" + cityD);
 		console.log('service trip');
-		let tripUrl: string = this.baseUrl + '/trip/search/' + searchParams.cityA + '/' + searchParams.cityD + '/' + searchParams.date;
+		let tripUrl: string = this.baseUrl + '/trip/search/' + cityD + '/' + cityA + '/' + date;
+		console.log(tripUrl);
 		return this.http.get(tripUrl);
 	}
 }

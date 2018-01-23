@@ -24,8 +24,7 @@ export class TripsSearchComponent implements OnInit {
 
 	onSubmit(){
 		this.route.params.subscribe((params : Params) => {
-			let paramsUrl = this.tripsParams.cityD + '/' + this.tripsParams.cityA + '/' + this.tripsParams.date;
-			this.tripService.getTripByParams(paramsUrl).subscribe(res => this.tripsFind = res)
+			this.tripService.getTripByParams(this.tripsParams.cityD, this.tripsParams.cityA, this.tripsParams.date).subscribe(res => this.tripsFind = res)
 		});
 	}
 

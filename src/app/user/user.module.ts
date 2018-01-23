@@ -24,7 +24,7 @@ const routes: Routes = [
   {
     path: 'users',
     component: AdminPanelComponent,
-    //canActivate: [AdminGuard]
+    canActivate: [AdminGuard]
   },
   {
     path: 'profile',

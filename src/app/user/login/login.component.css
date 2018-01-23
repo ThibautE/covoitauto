@@ -25,3 +25,7 @@ button {
 .err{
     color: red;
 }
+
+#co{
+    display: inline-block;
+}

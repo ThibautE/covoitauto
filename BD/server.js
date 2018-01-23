@@ -134,6 +134,17 @@ mongoClient.connect(url, function(err, database) {
 		});
 	});
 
+	//selectionner un user en particulié
+	app.get("/user/profile/:mail",function(req,res){
+		let user = {'mail' : req.params.mail};
+		getUserByParams(db,{"message" : "/users", "filterObject" : user}, function(step, results){
+			res.setHeader("Content-type","application/json; charset = UTF-8");
+			let json = JSON.stringify(results);
+			console.log(json);
+			res.end(json);
+		});
+	});
+
 	// inscriptions user 
 	app.post("/user/create", function(req, res) {
 		
@@ -161,7 +172,7 @@ mongoClient.connect(url, function(err, database) {
 	});
 
 	//delete user
-	app.delete("/user/:mail/",function(req,res){
+	app.delete("/user/delete/:mail/",function(req,res){
 		deleteUser(db,{"message" : "/users", "filterObject" : req.body.mail}, function(step, results){
 			res.setHeader("Content-type","application/json; charset = UTF-8");
 			let json = JSON.stringify(results);

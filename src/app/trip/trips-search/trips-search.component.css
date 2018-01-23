@@ -29,3 +29,34 @@ form .bValid{
     border-style: none;
     color : #fff;
 }
+
+li{
+    list-style-type: none;
+    background-color: #e6e6e6;
+    margin : 1%;
+    width: 80%;
+    padding: 1%;
+}
+
+.tripFind ul{
+    margin-left: 10%;
+}
+
+.tripFind li{
+    list-style-type: none;
+    background-color: #e6e6e6;
+    margin : 1%;
+    width: 80%;
+    padding: 1%;
+}
+
+.tripFind .res{
+    float: right;
+}
+
+.tripFind a{
+    background-color: #4caf50;
+    text-decoration: none;
+    color: #fff;
+    padding: 1px 15px;  
+}

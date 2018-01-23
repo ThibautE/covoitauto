@@ -13,7 +13,7 @@ import { Cookie } from 'ng2-cookies';
 export class LoginComponent implements OnInit{
 
   isLogged: boolean = false;
-  private displayedName: string = '';
+  private name: string = '';
 
   private firstName: string = '';
   private lastName: string = '';
@@ -43,15 +43,12 @@ export class LoginComponent implements OnInit{
 
     Cookie.set('_id', user._id);
     Cookie.set('mail', user.mail);
-    Cookie.set('firstName', user.prenom);
-    Cookie.set('lastName', user.nom);
-    Cookie.set('isAdmin', (user.role.indexOf('admin') >= 0 ) ? 'true' : 'false');
+    Cookie.set('isAdmin', (user.role.indexOf('administrateur') >= 0 ) ? 'true' : 'false');
 
     this.loadUser();
   }
 
   logout(){
-    // console.log('Logging out -->[]');
     Cookie.deleteAll();
     this.isLogged = false;
     this.route.navigate(['/']);
@@ -64,9 +61,8 @@ export class LoginComponent implements OnInit{
   private loadUser() {
     this.firstName = Cookie.get('firstName');
     this.lastName = Cookie.get('lastName');
-    this.displayedName = this.firstName + ' ' + this.lastName[0]; // prenom + initiale nom
+    this.name = this.firstName + ' ' + this.lastName; // prenom + nom
     this.admin = Cookie.get('isAdmin') == 'true';
-
     this.isLogged = true;
   }
 }

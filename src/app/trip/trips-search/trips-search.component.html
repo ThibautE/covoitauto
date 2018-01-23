@@ -6,18 +6,15 @@
 </form>
 
 
-	<div *ngIf= "!empty()" >
-		<li *ngFor="let trip of tripsFind"> 
-<<<<<<< HEAD
-            <label *ngIf=" trip.date > today.getTime()"  > {{trip.depart.ville}} à {{trip.arrive.ville}} pour {{trip.prix}} €</label>
-			<label *ngIf="trip.place != 0"> il reste {{trip.place}} !</label>
-			<label *ngIf="trip.place == 0" class="warning"> [Plus de place disponible !]</label>
-=======
-            <label > {{trip.depart.ville}} à {{trip.arrive.ville}} pour {{trip.prix}} €
-			<label *ngIf="trip.nbPlaces != 0"> il reste {{trip.nbPlaces}} !</label>
-			<label *ngIf="trip.nbPlaces == 0" class="warning"> [Plus de place disponible !]</label></label>
->>>>>>> 9e9d48ea2d38601151fafeea25cc585324f6f610
-        </li>
+	<div class="tripFind" *ngIf= "!empty()" >
+		Trajet trouvé en rapport à votre recherche :
+		<ul>
+			<li *ngFor="let trip of tripsFind"> 
+	            <label > {{trip.depart.ville}} à {{trip.arrive.ville}} pour {{trip.prix}} €
+				<label *ngIf="trip.nbPlaces != 0"> il reste {{trip.nbPlaces}} ! <a href="" class="res">Réserver</a></label>
+				<label *ngIf="trip.nbPlaces == 0" class="warning"> [Plus de place disponible !]</label></label>
+	        </li>
+		</ul>
 	</div> 
 	<div *ngIf= "empty()">
 		<p> Aucun covoiturage n'est proposé pour votre recherche.</p>

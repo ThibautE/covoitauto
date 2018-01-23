@@ -10,18 +10,16 @@ import 'rxjs/Rx';
 })
 export class AdminPanelComponent implements OnInit {
 
-	private users: Object[];
+    protected users : any = [];
 
   	constructor(private userService : UserService, private route: ActivatedRoute) { }
 
   	ngOnInit() {
-  		this.route.params.subscribe((params : Params) => {
-			this.userService.getAllUsers().subscribe(res => this.users = res)
-		});
-  	}
+        this.userService.getAllUsers().subscribe((res => this.users = res));
+    }
 
-  	deleteUser(){
-    
+  	deleteUser(mail : string){
+      this.userService.delete(mail);
   	}
 
 

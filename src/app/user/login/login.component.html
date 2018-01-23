@@ -5,10 +5,11 @@
   </div>
 
   <div *ngIf="isLogged">
-    <div>
-      <h2 >
-        <a [routerLink]="['/dashboard']">{{displayedName}} </a>
-      </h2>
+    <div id="co">
+    Bienvenue {{name}}
+      <h3 >
+        <a [routerLink]="['profile']">Mon profil</a>
+      </h3>
     </div>
 
     <button (click)="logout()" >déconnexion</button>

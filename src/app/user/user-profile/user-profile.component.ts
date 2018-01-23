@@ -10,29 +10,23 @@ import { Cookie } from 'ng2-cookies';
 })
 export class UserProfileComponent implements OnInit {
 
-  	model: Object = {};
-  	loading = true;
+  	profile: any = [];
 
   	constructor(private user: UserService) { }
 
   	ngOnInit() {
-	    this.user.getByID(Cookie.get('_id')).subscribe(res => {
+  		this.profile = [];
+	    this.user.getByMail(Cookie.get('mail')).subscribe(res => {
 	      	if (res && res[0] !== undefined) {
 	        	res = res[0];
 	      	}else{
 	        	return;
 	      	}
-	      	this.model = res;
-	      	this.loading = false;
+	      	this.profile = res;
 	    });
   	}
 
-  	submit() {
-    	this.loading = true;
-    	this.user.update(this.model).subscribe(res => {
-      		this.loading = false;
-    	});
-  	}
+  	submit(){}
 
 }
 

@@ -2,7 +2,7 @@
     <label for="mail">Email</label>
 	<input type="text" id="mail" required placeholder="email" [(ngModel)]="mail" name = "mail"/><p></p>
     <label for="password">Mot de passe</label>
-	<input type="text" id="password" required placeholder="mot de passe" [(ngModel)]="password" name = "password"/><p></p>
+	<input type="password" id="password" required placeholder="mot de passe" [(ngModel)]="password" name = "password"/><p></p>
 	<button>Se connecter</button>
 </form>
 <div *ngIf="isLoggedIn">

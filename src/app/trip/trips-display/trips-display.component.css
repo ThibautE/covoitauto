@@ -1,12 +1,16 @@
 ul{
+	margin-top: 10%;
+	padding: 1%;
+	width: 78%;
 	margin-left: 10%;
+	border: 1px solid black;
 }
 
 li{
 	list-style-type: none;
 	background-color: #e6e6e6;
 	margin : 1%;
-	width: 80%;
+	width: 95%;
 	padding: 1%;
 }
 

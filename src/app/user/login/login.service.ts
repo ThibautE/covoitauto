@@ -9,7 +9,7 @@ import { environment } from '../../../environments/environment';
 @Injectable()
 export class LoginService {
 
-    baseUrl = environment.apiUrl + ':' + environment.apiPort;
+    baseUrl = environment.apiUrl + ':' + environment.serverPort;
     
     @Output() change: EventEmitter<null> = new EventEmitter();
 

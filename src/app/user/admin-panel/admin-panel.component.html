@@ -1,16 +1,8 @@
 <p>
   Liste des utilisateurs de covoitauto :
 </p>
-
-<table>
-  <tr>
-    <td>
-      <ul>
-        <li *ngFor="let user of (users);  let i = index"> 
-            <p> Utilisateur {{i}} : <br> {{user.nom}} {{user.prenom}} <br>Email : {{user.mail}}, <br> Téléphone : {{user.tel}} <button type="button">Supprimer</button> </p>
-        </li>
-        
-      </ul>
-    </td>
-  </tr>
-</table>
+<ul>
+  <li *ngFor="let user of (users); let i = index"> 
+    <p> Utilisateur : <br> {{user.nom}} {{user.prenom}} <br>Email : {{user.mail}}, <br> Téléphone : {{user.telephone}} <button (click)="deleteUser(i) ">Supprimer</button> </p>
+  </li>
+</ul>

@@ -1,13 +1,13 @@
 <h2>Mon profil</h2>
 
-  <label>Nom : </label> {{model.nom}}<br>
-  <label>Prenom :</label> {{model.prenom}}<br>
-  <label>Adresse :</label> {{model.adresse}}<br>
-  <label>Telephone :</label> {{model.telephone}}<br>
-  <label>Age :</label> {{model.age}}<br>
-  <label>Adresse mail :</label>{{model.mail}}<br>
+  <label>Nom : </label> {{profile.nom}}<br>
+  <label>Prenom :</label> {{profile.prenom}}<br>
+  <label>Ville :</label> {{profile.adresse.ville}}<br>
+  <label>Telephone :</label> {{profile.telephone}}<br>
+  <label>Age :</label> {{profile.age}}<br>
+  <label>Adresse mail :</label>{{profile.mail}}<br>
   <label>Changer mot de passe :</label>
-  <input [(ngModel)]="model.password" type="password"><br>
+  <input [(ngModel)]="profile.password" type="password"><br>
 
   <label>Mes Vehicules</label><br>
 
